@@ -341,7 +341,7 @@ for s_child in os.listdir(s_path):
         print(s_child_path)
 ```
 ## Modules and Libraries
-### 3.输入日期， 判断这一天是这一年的第几天？
+### 3.Enter the date， Output the day, month and year？
 ```python
 import datetime
 def dayofyear():
@@ -359,8 +359,8 @@ alist = [1,2,3,4,5]
 random.shuffle(alist)
 print(alist)
 ```
-## 数据类型
-### 5.现有字典 d= {'a':24,'g':52,'i':12,'k':33}请按value值进行排序?
+## Data types
+### 5.Given a dictionary d= {'a':24,'g':52,'i':12,'k':33}; Sort based on values?
 ```python
 sorted(d.items(),key=lambda x:x[1])
 ```
@@ -417,19 +417,20 @@ l2 = list(set(l1))
 print(l2)
 ```
 用list类的sort方法:
+Method 1: Using sort() method
 ```python
 l1 = ['b','c','d','c','a','a']
 l2 = list(set(l1))
 l2.sort(key=l1.index)
 print(l2)
 ```
-也可以这样写:
+Method 2:
 ```python
 l1 = ['b','c','d','c','a','a']
 l2 = sorted(set(l1),key=l1.index)
 print(l2)
 ```
-也可以用遍历：
+Meethod 3: Using for loop：
 ```python
 l1 = ['b','c','d','c','a','a']
 l2 = []
