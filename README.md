@@ -275,7 +275,7 @@
 
 <!-- /TOC -->
 
-# Python Basics
+# Python-Basics
 ## Working with files
 ### 1.有一个jsonline格式的文件file.txt大小约为10K
 ```python
@@ -285,7 +285,7 @@ def get_lines():
 
 if __name__ == '__main__':
     for e in get_lines():
-        process(e) # 处理每一行数据
+        process(e) # Process every line of data
 ```
 现在要处理一个大小为10G的文件，但是内存只有4G，如果在只修改get_lines 函数而其他代码保持不变的情况下，应该如何实现？需要考虑的问题都有那些？
 ```python
@@ -340,14 +340,14 @@ for s_child in os.listdir(s_path):
     else:
         print(s_child_path)
 ```
-## 模块与包
+## Modules and Libraries
 ### 3.输入日期， 判断这一天是这一年的第几天？
 ```python
 import datetime
 def dayofyear():
-    year = input("请输入年份: ")
-    month = input("请输入月份: ")
-    day = input("请输入天: ")
+    year = input("Enter the year: ")
+    month = input("Enter the month: ")
+    day = input("Enter the day: ")
     date1 = datetime.date(year=int(year),month=int(month),day=int(day))
     date2 = datetime.date(year=int(year),month=1,day=1)
     return (date1-date2).days+1
