@@ -910,7 +910,7 @@ def determine_day():
 if __name__=="__main__":
     determine_day()
 ```
-### Merge two ordered list l1,l2 without using extend function
+### 36.Merge two ordered list l1,l2 without using extend function
 ```python
 def loop_merge_sort(l1,l2):
     tmp = []
