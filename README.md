@@ -891,23 +891,26 @@ generate_list(list_dat)
 # output : 10 18 20 
 
 ```
-### 34.用一行代码生成[1,4,9,16,25,36,49,64,81,100]
+### 34.Generate the following list [1,4,9,16,25,36,49,64,81,100] using one line of code
 ```python
+# List compressions
 [x * x for x in range(1,11)]
 ```
-### 35.输入某年某月某日，判断这一天是这一年的第几天？
+### 35.Write a function that takes the year, month and day as the input and outputs the day of the year？
 ```python
 import datetime
 
-y = int(input("请输入4位数字的年份:"))
-m = int(input("请输入月份:"))
-d = int(input("请输入是哪一天"))
-
-targetDay = datetime.date(y,m,d)
-dayCount = targetDay - datetime.date(targetDay.year -1,12,31)
-print("%s是 %s年的第%s天。"%(targetDay,y,dayCount.days))
+def determine_day():
+    y = int(input("Please enter a 4-digit year:"))
+    m = int(input("Please enter the month:"))
+    d = int(input("Please enter the day"))
+    targetDay = datetime.date(y,m,d)
+    dayCount = targetDay - datetime.date(targetDay.year -1,12,31)
+    return print(f"{targetDay} is the {dayCount.days} day of the year {y}")
+if __name__=="__main__":
+    determine_day()
 ```
-### 36.两个有序列表，l1,l2，对这两个列表进行合并不可使用extend
+### Merge two ordered list l1,l2 without using extend function
 ```python
 def loop_merge_sort(l1,l2):
     tmp = []
@@ -926,10 +929,10 @@ def loop_merge_sort(l1,l2):
         del l2[0]
     return tmp
 ```
-### 37.给定一个任意长度数组，实现一个函数
-让所有奇数都在偶数前面，而且奇数升序排列，偶数降序排序，如字符串'1982376455',变成'1355798642'
+### 37.Given an array of arbitrary length, implement a function
+Let all odd numbers be in front of even numbers, and arrange the odd numbers in ascending order, and the even numbers in descending order, such as the string '1982376455', become '1355798642'
 ```python
-# 方法一
+# Method 1
 def func1(l):
     if isinstance(l, str):
         l = [int(i) for i in l]
@@ -939,58 +942,59 @@ def func1(l):
             l.insert(0, l.pop(i))
     print(''.join(str(e) for e in l))
 
-# 方法二
+# Method 2
 def func2(l):
     print("".join(sorted(l, key=lambda x: int(x) % 2 == 0 and 20 - int(x) or int(x))))
 ```
-### 38.写一个函数找出一个整数数组中，第二大的数
+### 38. Write a function to find the second largest number in an integer array
 ```python
 def find_second_large_num(num_list):
     """
-    找出数组第2大的数字
+    Find the second largest number in the array
     """
-    # 方法一
-    # 直接排序，输出倒数第二个数即可
+    # Method 1
+    # Sort the elements using sorted() built-in function and output the second last element
     tmp_list = sorted(num_list)
-    print("方法一\nSecond_large_num is :", tmp_list[-2])
+    return print("Method 1\nSecond_large_num is :", tmp_list[-2])
     
-    # 方法二
-    # 设置两个标志位一个存储最大数一个存储次大数
-    # two 存储次大值，one 存储最大值，遍历一次数组即可，先判断是否大于 one，若大于将 one 的值给 two，将 num_list[i] 的值给 one，否则比较是否大于two，若大于直接将 num_list[i] 的值给two，否则pass
-    one = num_list[0]
-    two = num_list[0]
+    # Method 2
+    # Set two flags, one to store the maximum number and one to store the next largest number
+    #flag2 stores the next-largest value, flag1 stores the maximum value, traverse the array once, first determine whether it is greater than flag1, if it is greater than the value of flag1 , assign to flag2, assign the value of num_list [i] to flag1, otherwise compare whether its  greater than flag2, if it is greater then assign the value of num_list [i] to flag2, otherwise pass
+def find_second_largest_num(num_list)
+    flag1 = num_list[0]
+    flag2 = num_list[0]
     for i in range(1, len(num_list)):
-        if num_list[i] > one:
-            two = one
-            one = num_list[i]
-        elif num_list[i] > two:
+        if num_list[i] > flag1:
+            flag2 = flag1
+            flag1 = num_list[i]
+        elif num_list[i] > flag2:
             two = num_list[i]
-    print("方法二\nSecond_large_num is :", two)
+    print("Method 2\nSecond_large_num is :", flag2)
     
-    # 方法三
-    # 用 reduce 与逻辑符号 (and, or)
-    # 基本思路与方法二一样，但是不需要用 if 进行判断。
+    # Method 3
+    # Using reduce function and the logical (and, or) operators
+    # The basic idea is the same as the second method, but there is no need to use if condition。
     from functools import reduce
     num = reduce(lambda ot, x: ot[1] < x and (ot[1], x) or ot[0] < x and (x, ot[1]) or ot, num_list, (0, 0))[0]
-    print("方法三\nSecond_large_num is :", num)
+    print("Method 3\nSecond_large_num is :", num)
     
     
 if __name__ == '__main___':
     num_list = [34, 11, 23, 56, 78, 0, 9, 12, 3, 7, 5]
     find_second_large_num(num_list)
 ```
-### 39.阅读一下代码他们的输出结果是什么？
+### 39.What is the output of the following function？
 ```python
 def multi():
     return [lambda x : i*x for i in range(4)]
 print([m(3) for m in multi()])
 ```
-正确答案是[9,9,9,9]，而不是[0,3,6,9]产生的原因是Python的闭包的后期绑定导致的，这意味着在闭包中的变量是在内部函数被调用的时候被查找的，因为，最后函数被调用的时候，for循环已经完成, i 的值最后是3,因此每一个返回值的i都是3,所以最后的结果是[9,9,9,9]
-### 40.统计一段字符串中字符出现的次数
+The correct answer is [9,9,9,9], not [0,3,6,9]. This is caused by the behavior of closures in python, which means that the variables in the closure are in an internal function and it is searched when it is called, when the last function is called, the for loop is completed, the value of i is equal 3, so each return value of i is 3, so the final result is [9, 9,9,9]
+### 40. Count the number of occurrences of characters in a string
 ```python
-# 方法一
+# Method 1
 def count_str(str_data):
-    """定义一个字符出现次数的函数"""
+    """Define a function of frequency of occurance of a character"""
     dict_str = {} 
     for i in str_data:
         dict_str[i] = dict_str.get(i, 0) + 1
@@ -1001,7 +1005,7 @@ for k, v in dict_str.items():
     str_count_data += k + str(v)
 print(str_count_data)
 
-# 方法二
+# Method 2
 from collections import Counter
 
 print("".join(map(lambda x: x[0] + str(x[1]), Counter("AAABBCCAC").most_common())))
