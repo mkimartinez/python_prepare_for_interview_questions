@@ -439,12 +439,12 @@ for i in l1:
         l2.append(i)
 print(l2)
 ```
-### 14.给定两个list A，B ,请用找出A，B中相同与不同的元素
+### 14.Given two lists A，B ,Find elements that are similar and different in list A and list B
 ```python
-A,B 中相同元素： print(set(A)&set(B))
-A,B 中不同元素:  print(set(A)^set(B))
+A,B Similar elements： print(set(A)&set(B))
+A,B different elements:  print(set(A)^set(B))
 ```
-## 企业面试题
+## Enterprise interview questions
 ### 15.python新式类和经典类的区别？
 a. 在python里凡是继承了object的类，都是新式类
 
@@ -526,7 +526,7 @@ foo2 = Foo()
 print(foo1 is foo2)  # True
 
 ```
-### 18.反转一个整数，例如-123 --> -321 
+### 18.Reverse an For example; -123 --> -321 
 ```python
 class Solution(object):
     def reverse(self,x):
@@ -547,7 +547,7 @@ if __name__ == '__main__':
     print(reverse_int)
 ```
 ### 19.设计实现遍历目录与子目录，抓取.pyc文件
-第一种方法：
+Method 1：
 ```python
 import os
 
@@ -563,7 +563,7 @@ def get_files(dir,suffix):
 
 get_files("./",'.pyc')
 ```
-第二种方法：
+Method 2：
 ```python
 import os
 
@@ -580,10 +580,10 @@ def scan_path(ph):
             scan_path(obj)
     
 if __name__=='__main__':
-    path = input('输入目录')
+    path = input('Enter path')
     scan_path(path)
 ```
-第三种方法
+Method 3
 ```python
 from glob import iglob
 
@@ -596,7 +596,7 @@ if __name__ == "__main__":
     postfix = ".pyc"
     func("K:\Python_script", postfix)
 ```
-### 20.一行代码实现1-100之和
+### 20.Calculate the sum of (1-100) using one line of code
 ```python
 count = sum(range(0,101))
 print(count)
@@ -799,25 +799,25 @@ class Solution(object):
 alist_sort = sorted(alist,key=lambda e: e.__getitem__('age'),reverse=True)
 ```
 
-### 30.python代码实现删除一个list里面的重复元素
+### 30.python code to remove duplicate element from a list
 ```python
 def distFunc1(a):
-    """使用集合去重"""
+    """Using a set to remove duplicate elements"""
     a = list(set(a))
     print(a)
 
 def distFunc2(a):
-    """将一个列表的数据取出放到另一个列表中，中间作判断"""
+    """ Take the elements from one list and put it in another list, checking if element already exist """
     list = []
     for i in a:
         if i not in list:
             list.append(i)
-    #如果需要排序的话用sort
+    #use sort function if you want a sorted list
     list.sort()
     print(list)
 
 def distFunc3(a):
-    """使用字典"""
+    """Using a dictionary"""
     b = {}
     b = b.fromkeys(a)
     c = list(b.keys())
@@ -830,11 +830,11 @@ if __name__ == "__main__":
     distFunc3(a)
   
 ```
-### 31.统计一个文本中单词频次最高的10个单词？
+### 31. Count the 10 most frequent words in a text？
 ```python
 import re
 
-# 方法一
+# Method 1:
 def test(filepath):
     
     distone = {}
@@ -853,8 +853,8 @@ def test(filepath):
     return num_ten
     
  
-# 方法二 
-# 使用 built-in 的 Counter 里面的 most_common
+# Method 2 
+# Using the built-in most_common function from Counter
 import re
 from collections import Counter
 
@@ -863,12 +863,12 @@ def test2(filepath):
     with open(filepath) as f:
         return list(map(lambda c: c[0], Counter(re.sub("\W+", " ", f.read()).split()).most_common(10)))
 ```
-### 32.请写出一个函数满足以下条件
-该函数的输入是一个仅包含数字的list,输出一个新的list，其中每一个元素要满足以下条件：
+### 32.Please write a function that meets the following conditions
+The input of this function is a list containing only numbers, and the output is a new list, where each element must meet the following conditions:
 
-1、该元素是偶数
+1、The element is even
 
-2、该元素在原list中是在偶数的位置(index是偶数)
+2、The element is in the even position in the original list (index is even)
 
 ```python
 def num_list(num):
@@ -878,12 +878,18 @@ num = [0,1,2,3,4,5,6,7,8,9,10]
 result = num_list(num)
 print(result)
 ```
-### 33.使用单一的列表生成式来产生一个新的列表
-该列表只包含满足以下条件的值，元素为原始列表中偶数切片
+### 33.Use a single list generator to generate a new list
+The list contains only values that meet the following conditions, the elements are even slices in the original list
 ```python
-list_data = [1,2,5,8,10,3,18,6,20]
-res = [x for x in list_data[::2] if x %2 ==0]
-print(res)
+def generate_list(list_data):
+    res = (x for x in list_data[::2] if x %2 ==0)
+    for element in res:
+        print(element, end=" ")
+
+list_dat = [1,2,5,8,10,3,18,6,20]
+generate_list(list_dat)
+# output : 10 18 20 
+
 ```
 ### 34.用一行代码生成[1,4,9,16,25,36,49,64,81,100]
 ```python
@@ -1497,7 +1503,7 @@ class A(object):
 ```python
 print([x*x for x in range(1, 11)])
 ```
-### 83.对装饰器的理解，并写出一个计时器记录方法执行性能的装饰器？
+### 83.对装饰器的理解，并写出一个计时器记录方法执行性能���装饰器？
 装饰器本质上是一个callable object ，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。
 
 ```python
