@@ -930,7 +930,7 @@ def loop_merge_sort(l1,l2):
     return tmp
 ```
 ### 37.Given an array of arbitrary length, implement a function
-Let all odd numbers be in front of even numbers, and arrange the odd numbers in ascending order, and the even numbers in descending order, such as the string '1982376455', become '1355798642'
+All odd numbers be in front of even numbers, and arrange the odd numbers in ascending order, and the even numbers in descending order, such as the string '1982376455', become '1355798642'
 ```python
 # Method 1
 def func1(l):
@@ -1010,42 +1010,75 @@ from collections import Counter
 
 print("".join(map(lambda x: x[0] + str(x[1]), Counter("AAABBCCAC").most_common())))
 ```
-### 41.super函数的具体用法和场景
-https://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p07_calling_method_on_parent_class.html
+### 41. What are some specific use cases of super() function
+Super is used to] return a proxy object that delegates method calls to a parent or sibling class of type. This is useful for accessing inherited methods that have been overridden in a class. The search order is same as that used by getattr() except that the type itself is skipped.
+Some common uses are as follows:
+Use Case 1: Super can be called upon in a single inheritance, in order to refer to the parent class or multiple classes without explicitly naming them. It’s somewhat of a shortcut, but more importantly, it helps keep your code maintainable for the foreseeable future.
+Use Case 2: Super can be called upon in a dynamic execution environment for multiple or collaborative inheritance. This use is considered exclusive to Python, because it’s not possible with languages that only support single inheritance or are statically compiled.
+Check the following links for examples on how super() builti-in function is used and exmaples.
+https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods
+https://appdividend.com/2019/01/22/python-super-function-example-super-method-tutorial/
 
-# Python高级
-## 元类
-### 42.Python中类方法、类实例方法、静态方法有何区别？
-类方法: 是类对象的方法，在定义时需要在上方使用 @classmethod 进行装饰,形参为cls，表示类对象，类对象和实例对象都可调用
+#  Advanced Python
+## Metaclass
+### 42. The difference between @classmethod 、类实例方法、静态方法有何区别？
+@classmethod: This decorator exists so you can create class methods that are passed the actual class object within the function call, much like self is passed to any other ordinary instance method in a class.
 
-类实例方法: 是类实例化对象的方法,只有实例对象可以调用，形参为self,指代对象本身;
+Instance methods: Instance methods are the most common type of methods in Python classes. These are so called because they can access unique data of their instance. If you have two objects each created from a car class, then they each may have different properties. They may have different colors, engine sizes, seats, and so on. Instance methods must have self as a parameter, but you don’t need to pass this in every time. Self is another Python special term. Inside any instance method, you can use self to access any data or methods that may reside in your class. You won’t be able to access them without going through self.
 
-静态方法: 是一个任意函数，在其上方使用 @staticmethod 进行装饰，可以用对象直接调用，静态方法实际上跟该类没有太大关系
-### 43.遍历一个object的所有属性，并print每一个属性名？
+@staticmethod: The @staticmethod decorator is similar to @classmethod in that it can be called from an uninstantiated class object, although in this case there is no cls parameter passed to its method. 
+
+Though classmethod and staticmethod are quite similar, there's a slight difference in usage for both entities: classmethod must have a reference to a class object as the first parameter, whereas staticmethod can have no parameters at all.
+
+Regular methods of  a class automatically takes the class instance as the fisrt argument 
+
+class Date(object):
+
+    def __init__(self, day=0, month=0, year=0):
+        self.day = day
+        self.month = month
+        self.year = year
+
+    @classmethod
+    def from_string(cls, date_as_string):
+        day, month, year = map(int, date_as_string.split('-'))
+        date1 = cls(day, month, year)
+        return date1
+
+    @staticmethod
+    def is_date_valid(date_as_string):
+        day, month, year = map(int, date_as_string.split('-'))
+        return day <= 31 and month <= 12 and year <= 3999
+
+date2 = Date.from_string('11-09-2012')
+is_date = Date.is_date_valid('11-09-2012')
+
+### 43. Iterate over all attributes of an object and print each attribute name？
 ```python
 class Car:
-    def __init__(self,name,loss): # loss [价格，油耗，公里数]
+    def __init__(self,name,loss): # loss [price，Fuel consumption，kilometers]
         self.name = name
         self.loss = loss
     
     def getName(self):
+        # Get the name of the car
         return self.name
     
     def getPrice(self):
-        # 获取汽车价格
+        # Get the price of the car
         return self.loss[0]
     
     def getLoss(self):
-        # 获取汽车损耗值
+        # Get car wear value
         return self.loss[1] * self.loss[2]
 
-Bmw = Car("宝马",[60,9,500]) # 实例化一个宝马车对象
-print(getattr(Bmw,"name")) # 使用getattr()传入对象名字,属性值。
-print(dir(Bmw)) # 获Bmw所有的属性和方法
+Bmw = Car("BMW",[60,9,500]) # Instantiate a BMW car object
+print(getattr(Bmw,"name")) # Use getattr() to pass in the object name, attribute value。
+print(dir(Bmw)) # Get all the properties and methods of BMW
 ```
-### 44.写一个类，并让它尽可能多的支持操作符?
+### 44.Write a class that supports as many operators as possible?
 ```python
-class Array:
+class SampleClass:
     __list = []
     
     def __init__(self):
@@ -1076,26 +1109,19 @@ class Array:
     
         
 ```
-### 45.介绍Cython，Pypy Cpython Numba各有什么缺点
+### 45.Describe the drawbacks of Cython，Pypy Cpython Numba
 Cython
-### 46.请描述抽象类和接口类的区别和联系
+### 46.Please describe the difference and connection between abstract class and interface class
+1. An abstract class can have instance methods that implement a default behavior. An Interface can only declare constants and instance methods, but cannot implement default behavior and all methods are implicitly abstract. An interface has all public members and no implementation
 
-1.抽象类： 规定了一系列的方法，并规定了必须由继承类实现的方法。由于有抽象方法的存在，所以抽象类不能实例化。可以将抽象类理解为毛坯房，门窗，墙面的样式由你自己来定，所以抽象类与作为基类的普通类的区别在于约束性更强
+2. Interfaces can be inherited, abstract classes cannot
 
-2.接口类：与抽象类很相似，表现在接口中定义的方法，必须由引用类实现，但他与抽象类的根本区别在于用途：与不同个体间沟通的规则，你要进宿舍需要有钥匙，这个钥匙就是你与宿舍的接口，你的舍友也有这个接口，所以他也能进入宿舍，你用手机通话，那么手机就是你与他人交流的接口
+3. Interface definition methods, no implemented code, and abstract classes can implement some methods
 
-3.区别和关联：
+4. The basic data type in the interface is static and the abstract class is not
 
-1.接口是抽象类的变体，接口中所有的方法都是抽象的，而抽象类中可以有非抽象方法，抽象类是声明方法的存在而不去实现它的类
-
-2.接口可以继承，抽象类不行
-
-3.接口定义方法，没有实现的代码，而抽象类可以实现部分方法
-
-4.接口中基本数据类型为static而抽象类不是
-
-### 47.Python中如何动态获取和设置对象的属性？
-
+### 47. How to dynamically get and set the attributes of an object in Python？
+hasattr() function can be used to determine whether an attribute exist. getattr() is used for getting the attributes while setattr() is used for setting the attributes. An example is shown below:
 ```python
 if hasattr(Parent, 'x'):
     print(getattr(Parent, 'x'))
@@ -1103,41 +1129,35 @@ if hasattr(Parent, 'x'):
 print(getattr(Parent,'x'))
 ```
 
+## Memory management and garbage collection mechanism
+### 48.What operations will cause Python memory overflow, how to deal with those causes？
+### 49.Regarding Python memory management, which of the following statements is wrong  B
 
+A,Variables do not have to be declared in advance               
+B,Variables can be used directly without first being created and assigned
+C,Variables do not need to specify types                        
+D,You can use del to release resources
 
-## 内存管理与垃圾回收机制
-### 48.哪些操作会导致Python内存溢出，怎么处理？
-### 49.关于Python内存管理,下列说法错误的是  B
+### 50.Python's memory management mechanism and tuning methods？
 
-A,变量不必事先声明                                   B,变量无须先创建和赋值而直接使用
+Memory management mechasnism: Reference counting、garbage collection、Memory pool
 
-C,变量无须指定类型                                   D,可以使用del释放资源
+Reference counting：Reference counting is a very efficient means of memory management. When a Python object is referenced, its reference count increases by 1, When it is no longer referenced by a variable, the count is decremented by 1. When the reference count is equal to 0, the object is deleted. Weak references do not increase the reference count
+Garbage collection：
 
-### 50.Python的内存管理机制及调优手段？
+1.Reference counting
 
-内存管理机制: 引用计数、垃圾回收、内存池
-
-引用计数：引用计数是一种非常高效的内存管理手段，当一个Python对象被引用时其引用计数增加1,
-
-当其不再被一个变量引用时则计数减1,当引用计数等于0时对象被删除。弱引用不会增加引用计数
-
-垃圾回收：
-
-1.引用计数
-
-引用计数也是一种垃圾收集机制，而且也是一种最直观、最简单的垃圾收集技术。当Python的某个对象的引用计数降为0时，说明没有任何引用指向该对象，该对象就成为要被回收的垃圾了。比如某个新建对象，它被分配给某个引用，对象的引用计数变为1，如果引用被删除，对象的引用计数为0,那么该对象就可以被垃圾回收。不过如果出现循环引用的话，引用计数机制就不再起有效的作用了。
-
-2.标记清除
+Reference counting is also a garbage collection mechanism, and it is also the most intuitive and simplest garbage collection technology. When the reference count of an object in Python drops to 0, it means that there is no reference to the object, and the object becomes garbage to be recycled. For example, a newly created object is assigned to a reference, the object's reference count becomes 1, if the reference is deleted, the object's reference count is 0, then the object can be garbage collected. However, if there is a circular reference, the reference counting mechanism is no longer effective.。
 
 https://foofish.net/python-gc.html
 
-调优手段
+Tuning methods
 
-1.手动垃圾回收
+1.Manual garbage collection
 
-2.调高垃圾回收阈值
+2.Raise the garbage collection threshold
 
-3.避免循环引用
+3.Avoid loop references
 
 ### 51.内存泄露是什么？如何避免？
 
