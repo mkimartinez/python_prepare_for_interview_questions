@@ -1,13 +1,13 @@
 <!-- TOC -->
 
 - [Python Basics](#python Basics)
-    - [文件操作](#文件操作)
+    - [Working with files](#Working with files)
         - [1.有一个jsonline格式的文件file.txt大小约为10K](#1有一个jsonline格式的文件filetxt大小约为10k)
         - [2.补充缺失的代码](#2补充缺失的代码)
-    - [模块与包](#模块与包)
+    - [Modules and Libraries](#Modules and Libraries)
         - [3.输入日期， 判断这一天是这一年的第几天？](#3输入日期-判断这一天是这一年的第几天)
         - [4.打乱一个排好序的list对象alist？](#4打乱一个排好序的list对象alist)
-    - [数据类型](#数据类型)
+    - [Data Types](#Data Types)
         - [5.现有字典 d= {'a':24,'g':52,'i':12,'k':33}请按value值进行排序?](#5现有字典-d-a24g52i12k33请按value值进行排序)
         - [6.字典推导式](#6字典推导式)
         - [7.请反转字符串 "aStr"?](#7请反转字符串-astr)
@@ -1159,34 +1159,35 @@ Tuning methods
 
 3.Avoid loop references
 
-### 51.内存泄露是什么？如何避免？
+### 51. What is a memory leak? How to avoid it?
 
-**内存泄漏**指由于疏忽或错误造成程序未能释放已经不再使用的内存。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。
+**Memory leak**Refers to a program that fails to free memory that is no longer in use due to negligence or error. Memory leak does not refer to the physical disappearance of memory, but after an application allocates a certain section of memory, due to a design error, the control of the section of memory is lost before the section of memory is released, resulting in a waste of memory。
+https://en.wikipedia.org/wiki/Memory_leak
 
-有`__del__()`函数的对象间的循环引用是导致内存泄露的主凶。不使用一个对象时使用: del object 来删除一个对象的引用计数就可以有效防止内存泄露问题。
+Circular references between objects with `__del __ ()` functions are the main cause of memory leaks. When not using an object, use: del object to delete the reference count of an object to effectively prevent memory leaks.
 
-通过Python扩展模块gc 来查看不能回收的对象的详细信息。
+View the details of objects that cannot be recycled through the Python extension module gc。
 
-可以通过 sys.getrefcount(obj) 来获取对象的引用计数，并根据返回值是否为0来判断是否内存泄露
+You can use sys.getrefcount (obj) to get the reference count of an object, and determine whether a memory leak is based on whether the return value is 0
 
-## 函数
-### 52.python常见的列表推导式？
+## Python functions
+### 52.What are common list comprehensions？
 
-[表达式 for 变量 in 列表] 或者 [表达式 for 变量 in 列表 if  条件]
+[expression for variable in list] OR [expression for variable in list if  condition]
 
-### 53.简述read、readline、readlines的区别？
+### 53.Describe the difference among read、readline、readlines？
 
-read                           读取整个文件
+read                        Read the entire file
 
-readline                     读取下一行
+readline                    Read one line
 
-readlines                   读取整个文件到一个迭代器以供我们遍历
+readlines                   Read the entire file into an iterator for us to traverse
 
-### 54.什么是Hash（散列函数）？
+### 54.What is a Hash function？
 
-**散列函数**（英语：Hash function）又称**散列算法**、**哈希函数**，是一种从任何一种数据中创建小的数字“指纹”的方法。散列函数把消息或数据压缩成摘要，使得数据量变小，将数据的格式固定下来。该函数将数据打乱混合，重新创建一个叫做**散列值**（hash values，hash codes，hash sums，或hashes）的指纹。散列值通常用一个短的随机字母和数字组成的字符串来代表
+**Hash function** It is a method to create small digital "fingerprints" from any kind of data. The hash function compresses the message or data into a digest, making the amount of data smaller and fixing the format of the data. This function shuffles the data and recreates a fingerprint called hash values, hash codes, hash sums, or hashes. The hash value is usually represented by a string of short random letters and numbers
 
-### 55.python函数重载机制？
+### 55.Python function overloading mechanism？
 
 函数重载主要是为了解决两个问题。
 1。可变参数类型。
