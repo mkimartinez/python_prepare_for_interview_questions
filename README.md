@@ -46,8 +46,8 @@
         - [39.阅读一下代码他们的输出结果是什么？](#39阅读一下代码他们的输出结果是什么)
         - [40.统计一段字符串中字符出现的次数](#40统计一段字符串中字符出现的次数)
         - [41.super函数的具体用法和场景](#41super函数的具体用法和场景)
-- [Python高级](#python高级)
-    - [元类](#元类)
+- [Python Advanced](#python Advanced)
+    - [Metaclasses](#元类)
         - [42.Python中类方法、类实例方法、静态方法有何区别？](#42python中类方法类实例方法静态方法有何区别)
         - [43.遍历一个object的所有属性，并print每一个属性名？](#43遍历一个object的所有属性并print每一个属性名)
         - [44.写一个类，并让它尽可能多的支持操作符?](#44写一个类并让它尽可能多的支持操作符)
@@ -277,7 +277,7 @@
 
 # Python-Basics
 ## Working with files
-### 1.有一个jsonline格式的文件file.txt大小约为10K
+### 1. There is a json file with about 10K lines of data, write a function to read and process the data 
 ```python
 def get_lines():
     with open('file.txt','rb') as f:
@@ -287,15 +287,15 @@ if __name__ == '__main__':
     for e in get_lines():
         process(e) # Process every line of data
 ```
-现在要处理一个大小为10G的文件，但是内存只有4G，如果在只修改get_lines 函数而其他代码保持不变的情况下，应该如何实现？需要考虑的问题都有那些？
+If we want to process a file with a size of 10G, but the memory is only 4G. How should we achieve it by only modifying the get_lines function and other codes remain unchanged? What are the issues that need to be considered?
 ```python
 def get_lines():
     with open('file.txt','rb') as f:
         for i in f:
             yield i
 ```
-个人认为：还是设置下每次返回的行数较好，否则读取次数太多。
-```
+It is better to set the number of rows returned each time, otherwise the reading times are too many。
+```python
 def get_lines():
     l = []
     with open('file.txt','rb') as f:
@@ -303,7 +303,7 @@ def get_lines():
     l.append(data)
     yield l
 ```
-Pandaaaa906提供的方法
+Using mmap library
 ```python
 from mmap import mmap
 
@@ -321,16 +321,16 @@ if __name__=="__main__":
     for i in get_lines("fp_some_huge_file"):
         print(i)
 ```
-要考虑的问题有：内存只有4G无法一次性读入10G文件，需要分批读入分批读入数据要记录每次读入数据的位置。分批每次读取数据的大小，太小会在读取操作花费过多时间。
+The issues to be considered are: only 4G of memory cannot read 10G files at a time, and it is necessary to read in the data in batches. Record the location of each read data. If the size of the data read in batches each time is too small will spend too much time in the read operation.
 https://stackoverflow.com/questions/30294146/python-fastest-way-to-process-large-file
 
-###  2.补充缺失的代码
+###  2.Fill in the missing code
 ```python
 def print_directory_contents(sPath):
 """
-这个函数接收文件夹的名称作为输入参数
-返回该文件夹中文件的路径
-以及其包含文件夹中文件的路径
+This function receives the name of the folder as an input parameter
+Returns the path of the file in this folder
+And the path to the files in its containing folder
 """
 import os
 for s_child in os.listdir(s_path):
@@ -352,56 +352,115 @@ def dayofyear():
     date2 = datetime.date(year=int(year),month=1,day=1)
     return (date1-date2).days+1
 ```
-### 4.打乱一个排好序的list对象alist？
+### 4.write a function to shuffle elements of a sorted list？
+Method #1 : Fisher–Yates shuffle Algorithm
+
+This is one of the famous algorithms that is mainly employed to shuffle a sequence of numbers in python. This algorithm just takes the higher index value, and swaps it with current value, this process repeats in a loop till end of the list.
 ```python
 import random
-alist = [1,2,3,4,5]
-random.shuffle(alist)
-print(alist)
+def shuffle_list(alist):
+    # Printing original list
+    print ("The original list is : " + str(alist))
+    # using Fisher–Yates shuffle Algorithm
+    # to shuffle a list
+    for i in range(len(test_list)-1, 0, -1):
+        # Pick a random index from 0 to i
+        j = random.randint(0, i + 1)
+        # Swap arr[i] with the element at random index
+        test_list[i], test_list[j] = test_list[j], test_list[i]
+    # Printing shuffled list
+    print ("The shuffled list is : " +  str(test_list))
+test_list = [1, 4, 5, 6, 3]
+shuffle_list(test_list) 
+```
+Method #2: Using random.shuffle()
+```python
+import random
+def shuffle_list(test_list):
+    # Printing original list
+    print("The original list is : " + str(test_list))
+    # using random.shuffle() to shuffle a list
+    random.shuffle(test_list)
+    # Printing shuffled list
+    print("The shuffled list is : " + str(test_list))
+
+test_list = [1, 4, 5, 6, 3]
+shuffle_list(test_list)
+```
+Method #3 : Using random.sample()
+```python 
+import random
+def shuffle_list(test_list):
+    # Printing original list
+    print("The original list is : " + str(test_list))
+    # using random.sample() to shuffle a list
+    res = random.sample(test_list, len(test_list))
+    # Printing shuffled list
+    print("The shuffled list is : " + str(res))
+test_list = [1, 4, 5, 6, 3]
+shuffle_list(test_list)
+
 ```
 ## Data types
 ### 5.Given a dictionary d= {'a':24,'g':52,'i':12,'k':33}; Sort based on values?
 ```python
+def sort_on_values(dict1):
+    # x[0] denotes sort by key；
+    # x[1]denotes sort by value。
+    new_dict= sorted(dict1.items(),key=lambda x:x[1])
+    print(new_dict)
+d = {'a': 24, 'g': 52, 'i': 12, 'k': 33}
+sort_on_values(d)
 sorted(d.items(),key=lambda x:x[1])
+output = [('i', 12), ('a', 24), ('k', 33), ('g', 52)]
+
 ```
-    x[0]代表用key进行排序；x[1]代表用value进行排序。
-### 6.字典推导式
+### 6. Dictionary Comprehensions
 ```python
 d = {key:value for (key,value) in iterable}
+dict_variable = {key:value for (key,value) in dictonary.items()}
 ```
-### 7.请反转字符串 "aStr"?
+### 7.Write a function to reverse a given string "aStr"?
 ```python
-print("aStr"[::-1])
+def reverse_string(str1):
+    return print(str1[::-1])
+reverse_string("Mki")
 ```
-### 8.将字符串 "k:1 |k1:2|k2:3|k3:4"，处理成字典 {k:1,k1:2,...}
+### 8. Process the string "k: 1 | k1: 2 | k2: 3 | k3: 4" into a dictionary {k: 1, k1: 2, ...}
+Method #1: Using for loop
 ```python
 str1 = "k:1|k1:2|k2:3|k3:4"
 def str2dict(str1):
     dict1 = {}
-    for iterms in str1.split('|'):
+    for items in str1.split('|'):
         key,value = iterms.split(':')
         dict1[key] = value
     return dict1
-#字典推导式
+ ```
+Method #2: Using Dictionary comprehensions
+```python
+str1 = "k:1|k1:2|k2:3|k3:4"
 d = {k:int(v) for t in str1.split("|") for k, v in (t.split(":"), )}
 ```
-### 9.请按alist中元素的age由大到小排序
+### 9. Please sort by the age of the elements in alist from largest to smallest
 ```python
 alist = [{'name':'a','age':20},{'name':'b','age':30},{'name':'c','age':25}]
 def sort_by_age(list1):
-    return sorted(alist,key=lambda x:x['age'],reverse=True)
+    return print(sorted(list1,key=lambda x:x['age'],reverse=True))
+sort_by_age(alist)
 ```
-### 10.下面代码的输出结果将是什么？
+### 10.What is the output of the following code？
 ```python
 list = ['a','b','c','d','e']
 print(list[10:])
 ```
-代码将输出[],不会产生IndexError错误，就像所期望的那样，尝试用超出成员的个数的index来获取某个列表的成员。例如，尝试获取list[10]和之后的成员，会导致IndexError。然而，尝试获取列表的切片，开始的index超过了成员个数不会产生IndexError，而是仅仅返回一个空列表。这成为特别让人恶心的疑难杂症，因为运行的时候没有错误产生，导致Bug很难被追踪到。
-### 11.写一个列表生成式，产生一个公差为11的等差数列
+The code will output []; an empty list, and no IndexError will be generated. As expected, try to get the members of a list with an index that exceeds the number of members. For example, trying to get members of list [10] and later will cause IndexError: "list index out of range". However, when trying to get a slice of the list, the index will not exceed the number of members at the beginning of the indexError, but only returns an empty list. This becomes a particularly disgusting and intractable disease, because no errors are generated during operation, making it difficult to debug.
+### 11.Write a list generator 写一个列表生成式，产生一个公差为11的等差数列
+Write a list generator to produce an arithmetic sequence with a tolerance of 11
 ```python
 print([x*11 for x in range(10)])
 ```
-### 12.给定两个列表，怎么找出他们相同的元素和不同的元素？
+### 12. Given two lists, write a function to find out the same elements and different elements from the two lists
 ```python
 list1 = [1,2,3]
 list2 = [3,4,5]
@@ -410,13 +469,12 @@ set2 = set(list2)
 print(set1 & set2)
 print(set1 ^ set2)
 ```
-### 13.请写出一段python代码实现删除list里面的重复元素？
+### 13. Write python code to delete duplicate elements from a list？
 ```python
 l1 = ['b','c','d','c','a','a']
 l2 = list(set(l1))
 print(l2)
 ```
-用list类的sort方法:
 Method 1: Using sort() method
 ```python
 l1 = ['b','c','d','c','a','a']
@@ -468,7 +526,7 @@ c. 字典 dict 、 集合 set
 d. Python3 中没有 long，只有无限精度的 int
 
 ### 17.python如何实现单例模式?请写出两种实现方式?
-第一种方法:使用装饰器
+Method 1:Using decorators
 ```python
 def singleton(cls):
     instances = {}
@@ -486,7 +544,7 @@ foo1 = Foo()
 foo2 = Foo()
 print(foo1 is foo2)  # True
 ```
-第二种方法：使用基类
+Method 2：Using base class
 New 是真正创建实例对象的方法，所以重写基类的new 方法，以此保证创建对象的时候只生成一个实例
 ```python
 class Singleton(object):
@@ -784,7 +842,7 @@ nums = solution.twoSum(list,target)
 print(nums)
 ```
 
-```
+```python
 
 class Solution(object):
     def twoSum(self, nums, target):
@@ -1031,7 +1089,7 @@ Instance methods: Instance methods are the most common type of methods in Python
 Though classmethod and staticmethod are quite similar, there's a slight difference in usage for both entities: classmethod must have a reference to a class object as the first parameter, whereas staticmethod can have no parameters at all.
 
 Regular methods of  a class automatically takes the class instance as the fisrt argument 
-
+```python
 class Date(object):
 
     def __init__(self, day=0, month=0, year=0):
@@ -1189,20 +1247,23 @@ readlines                   Read the entire file into an iterator for us to trav
 
 ### 55.Python function overloading mechanism？
 
-函数重载主要是为了解决两个问题。
-1。可变参数类型。
-2。可变参数个数。
+Function overloading is mainly to solve two problems.
+1。Variable parameter types。
+2。Variable number of parameters。
 
 另外，一个基本的设计原则是，仅仅当两个函数除了参数类型和参数个数不同以外，其功能是完全相同的，此时才使用函数重载，如果两个函数的功能其实不同，那么不应当使用重载，而应当使用一个名字不同的函数。
+In addition, a basic design principle is that only when the two functions except the parameter type and the number of parameters are the same, then use function overloading, if the functions of the two functions are actually different, then not You should use overloading, and you should use a function with a different name.
 
 好吧，那么对于情况 1 ，函数功能相同，但是参数类型不同，python 如何处理？答案是根本不需要处理，因为 python 可以接受任何类型的参数，如果函数的功能相同，那么不同的参数类型在 python 中很可能是相同的代码，没有必要做成两个不同函数。
+Okay, so for case 1, the function is the same, but the parameter type is different, how does Python handle it? The answer is that there is no need to deal with it at all, because Python can accept any type of parameter. If the function of the function is the same, then the different parameter types are likely to be the same code in Python, and there is no need to make two different functions.
 
 那么对于情况 2 ，函数功能相同，但参数个数不同，python 如何处理？大家知道，答案就是缺省参数。对那些缺少的参数设定为缺省参数即可解决问题。因为你假设函数功能相同，那么那些缺少的参数终归是需要用的。
+So for case 2, the function is the same, but the number of parameters is different, how does Python handle it? As you know, the answer is the default parameters. Set the default parameters for those missing parameters to solve the problem. Because you assume that functions have the same function, those missing parameters are needed after all.
 
 好了，鉴于情况 1 跟 情况 2 都有了解决方案，python 自然就不需要函数重载了。
 
-### 56.写一个函数找出一个整数数组中，第二大的数
-### 57.手写一个判断时间的装饰器
+### 56.Write a function to find the second largest number in an integer array
+### 57.Write a decorator function to determine the current time
 ```python
 import datetime
 
