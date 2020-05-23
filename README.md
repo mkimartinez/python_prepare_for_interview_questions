@@ -516,16 +516,18 @@ e. 保持class与type的统一对新式类的实例执行a.__class__与type(a)�
 
 f.对于多重继承的属性搜索顺序不一样新式类是采用广度优先搜索，旧式类采用深度优先搜索。
 
-### 16.python中内置的数据结构有几种？
-a. 整型 int、 长整型 long、浮点型 float、 复数 complex
+### 16.What are built-in data types in Python？
+a.  int、  long、 float、  complex
 
-b. 字符串 str、 列表 list、 元祖 tuple
+b.  str、 list、  tuple
 
-c. 字典 dict 、 集合 set
+c. dict 、  set
 
 d. Python3 中没有 long，只有无限精度的 int
 
-### 17.python如何实现单例模式?请写出两种实现方式?
+### 17. How to implement singleton mode in Python? Please write two ways of implementation?
+The singleton pattern is a design pattern that restricts the instantiation of a class to one object. It is a way to provide one and only one object of a particular type. It involves only one class to create methods and specify the objects.
+Singleton Design Pattern can be understood by a very simple example of Database connectivity. When each object creates a unique Database Connection to the Database, it will highly affect the cost and expenses of the project. So, it is always better to make a single connection rather than making extra irrelevant connections which can be easily done by Singleton Design Pattern.
 Method 1:Using decorators
 ```python
 def singleton(cls):
@@ -545,7 +547,7 @@ foo2 = Foo()
 print(foo1 is foo2)  # True
 ```
 Method 2：Using base class
-New 是真正创建实例对象的方法，所以重写基类的new 方法，以此保证创建对象的时候只生成一个实例
+New is the method that actually creates the instance object, so the new method of the base class is rewritten to ensure that only one instance is generated when the object is created
 ```python
 class Singleton(object):
     def __new__(cls, *args, **kwargs):
@@ -562,7 +564,9 @@ foo2 = Foo()
 
 print(foo1 is foo2)  # True
 ```
-第三种方法：元类，元类是用于创建类对象的类，类对象创建实例对象时一定要调用call方法，因此在调用call时候保证始终只创建一个实例即可，type是python的元类
+Method 3: Metaclasses
+metaclasses are used to create class objects. When class objects create instance objects, they must call the call method, so when calling call, make sure to always create only one instance, type() is meta class of python
+
 ```python
 class Singleton(type):
     def __call__(cls, *args, **kwargs):
@@ -584,7 +588,7 @@ foo2 = Foo()
 print(foo1 is foo2)  # True
 
 ```
-### 18.Reverse an For example; -123 --> -321 
+### 18. Write a class with a function to reverse the input. For example; -123 --> -321 
 ```python
 class Solution(object):
     def reverse(self,x):
@@ -604,7 +608,7 @@ if __name__ == '__main__':
     reverse_int = s.reverse(-120)
     print(reverse_int)
 ```
-### 19.设计实现遍历目录与子目录，抓取.pyc文件
+### 19. Design a function to traverse a directory and grap all the files with the specified extension
 Method 1：
 ```python
 import os
@@ -659,20 +663,22 @@ if __name__ == "__main__":
 count = sum(range(0,101))
 print(count)
 ```
-### 21.Python-遍历列表时删除元素的正确做法
-遍历在新在列表操作，删除时在原来的列表操作
+### 21.Write a Python function to delete elements when traversing a list
+Iterate over the new list operation and delete the original list operation
+Method 1:
 ```python
-a = [1,2,3,4,5,6,7,8]
-print(id(a))
-print(id(a[:]))
-for i in a[:]:
-    if i>5:
-        pass
-    else:
+def iterate_delete(alist):
+    a = [1,2,3,4,5,6,7,8]
+    print(id(a))
+    print(id(a[:]))
+    for i in a[:]:
+        if i>5:
+            pass
+        else:
         a.remove(i)
     print(a)
-print('-----------')
-print(id(a))
+    print('-----------')
+    print(id(a))
 
 ```
 ```python
@@ -681,14 +687,14 @@ a=[1,2,3,4,5,6,7,8]
 b = filter(lambda x: x>5,a)
 print(list(b))
 ```
-列表解析
+List comprehension
 ```python
 a=[1,2,3,4,5,6,7,8]
 b = [i for i in a if i>5]
 print(b)
 ```
-倒序删除
-因为列表总是‘向前移’，所以可以倒序遍历，即使后面的元素被修改了，还没有被遍历的元素和其坐标还是保持不变的
+Delete in a list reverse order
+A list can be traversed in reverse order, even if the following elements are modified, the cordinates of elements that have not been traversed remain unchanged
 ```python
 a=[1,2,3,4,5,6,7,8]
 print(id(a))
@@ -701,26 +707,28 @@ print(id(a))
 print('-----------')
 print(a)
 ```
-### 22.字符串的操作题目
-全字母短句 PANGRAM 是包含所有英文字母的句子，比如：A QUICK BROWN FOX JUMPS OVER THE LAZY DOG. 定义并实现一个方法 get_missing_letter, 传入一个字符串采纳数，返回参数字符串变成一个 PANGRAM 中所缺失的字符。应该忽略传入字符串参数中的大小写，返回应该都是小写字符并按字母顺序排序（请忽略所有非 ACSII 字符）
+### 22. String operation problems
+Given a string check if it is Pangram or not. A pangram is a sentence containing every letter in the English Alphabet. Lowercase and Uppercase are considered the same. For exmaple, "A QUICK BROWN FOX JUMPS OVER THE LAZY DOG." 
+Define and implement a method get_missing_letter, pass in a string and return missing letters of a PANGRAM. The case in the input string  should be ignored, and the return string should be all lowercase characters and sorted alphabetically (please ignore all non-ACSII characters)
 
-**下面示例是用来解释，双引号不需要考虑:**
 
-(0)输入: "A quick brown for jumps over the lazy dog"
+**The following example is for explanation, double quotes do not need to be considered:**
 
-返回： ""
+(0)Input: "A quick brown for jumps over the lazy dog"
 
-(1)输入: "A slow yellow fox crawls under the proactive dog" 
+Return ： ""
 
-返回: "bjkmqz"
+(1)Input: "A slow yellow fox crawls under the proactive dog" 
 
-(2)输入: "Lions, and tigers, and bears, oh my!"
+Return: "bjkmqz"
 
-返回: "cfjkpquvwxz" 
+(2)Input : "Lions, and tigers, and bears, oh my!"
 
-(3)输入: ""
+Return : "cfjkpquvwxz" 
 
-返回："abcdefghijklmnopqrstuvwxyz"
+(3)Input : ""
+
+Return ："abcdefghijklmnopqrstuvwxyz"
 
 ```python
 def get_missing_letter(a):
@@ -733,56 +741,57 @@ print(get_missing_letter("python"))
 
 # other ways to generate letters
 # range("a", "z")
-# 方法一:
+# Method 1:
 import string
 letters = string.ascii_lowercase
-# 方法二:
+# Method 2:
 letters = "".join(map(chr, range(ord('a'), ord('z') + 1)))
 ```
 
-### 23.可变类型和不可变类型
-1,可变类型有list,dict.不可变类型有string，number,tuple.
+### 23.Mutable and Immutable data types
+A mutable object can change its state or contents while immutable objects cannot.
+1,Mutable data types include list,dict. Immutable data types include string，number,tuple.
 
-2,当进行修改操作时，可变类型传递的是内存中的地址，也就是说，直接修改内存中的值，并没有开辟新的内存。
+2,When the modification operation is performed, the mutable type passes the address in memory, that is, it directly modify the value in memory, and does not open up new memory。
 
-3,不可变类型被改变时，并没有改变原内存地址中的值，而是开辟一块新的内存，将原地址中的值复制过去，对这块新开辟的内存中的值进行操作。
+3, When the immutable type is changed, it does not change the value in the original memory address, but opens up a new memory, copies the value in the original address, and operates on the value in the newly opened memory。
 
-### 24.is和==有什么区别？
-is：比较的是两个对象的id值是否相等，也就是比较俩对象是否为同一个实例对象。是否指向同一个内存地址
+### 24.What is the difference between "is" and "==" in python？
+The == operator compares the values of both the operands and checks for value equality. Whereas is operator checks whether both the operands refer to the same object or not.
+is： Compares whether the id values of the two objects are equal, that is, whether the two objects are the same instance object. Whether it points to the same memory address
 
-== ： 比较的两个对象的内容/值是否相等，默认会调用对象的eq()方法
-### 25.求出列表所有奇数并构造新列表
+== ： Checks Whether the contents / values of the two objects compared are equal, calls the object's eq() method by default
+### 25. Find all odd numbers in a list and construct a new list
 ```python
 a = [1,2,3,4,5,6,7,8,9,10]
 res = [ i for i in a if i%2==1]
 print(res)
 ```
-### 26.用一行python代码写出1+2+3+10248
+### 26. write one line of code to generate 1+2+3+10248
 ```python
 from functools import reduce
-#1.使用sum内置求和函数
+#1.Using built-in sum() function 
 num = sum([1,2,3,10248])
 print(num)
-#2.reduce 函数
+#2.Using reduce() method
 num1 = reduce(lambda x,y :x+y,[1,2,3,10248])
 print(num1)
 ```
-### 27.Python中变量的作用域？（变量查找顺序)
-函数作用域的LEGB顺序
+### 27.Variable scopes in python？（Variable search order)
+LEGB order of function scope
 
-1.什么是LEGB?
+1.What is LEGB?
 
-L： local 函数内部作用域
+L： local:  Function scope. A variable created inside a function belongs to the local scope of that function, and can only be used inside that function.
 
-E: enclosing 函数内部与内嵌函数之间
+E: enclosing Accessible by the outer and the inner function
 
-G: global 全局作用域
+G: global: A variable created in the main body of the Python code is a global variable and belongs to the global scope. Global variables are available from within any scope, global and local.
 
-B： build-in 内置作用
+B： build-in 
 
-python在函数里面的查找分为4种，称之为LEGB，也正是按照这是顺序来查找的
-### 28.字符串 `"123"` 转换成 `123`，不使用内置api，例如 `int()`
-方法一： 利用 `str` 函数
+### 28. The string "123" is converted to '123' without using built-in functions such as 'int()'
+Method 1： Using 'str' function
 ```python
 def atoi(s):
     num = 0
@@ -792,7 +801,7 @@ def atoi(s):
                 num = num * 10 + j
     return num
 ```
-方法二： 利用 `ord` 函数
+Method 2： Using 'ord' function
 ```python
 def atoi(s):
     num = 0
@@ -800,7 +809,7 @@ def atoi(s):
         num = num * 10 + ord(v) - ord('0')
     return num
 ```
-方法三: 利用 `eval` 函数
+Method 3: Using 'eval' function
 ```python
 def atoi(s):
     num = 0
@@ -810,14 +819,14 @@ def atoi(s):
         num = num * 10 + n
     return num
 ```
-方法四: 结合方法二，使用 `reduce`，一行解决
+Method 4: Using method 2 with reduce() method
 ```python
 from functools import reduce
 def atoi(s):
     return reduce(lambda num, v: num * 10 + ord(v) - ord('0'), s, 0)
 ```
 ### 29.Given an array of integers
-给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。示例:给定nums = [2,7,11,15],target=9 因为 nums[0]+nums[1] = 2+7 =9,所以返回[0,1]
+Given an integer array and a target value, find the two numbers in the array that are the target value. You can assume that each input corresponds to only one answer, and the same elements cannot be reused. Example: Given nums = [2,7,11,15], target = 9 because nums [0] + nums [1] = 2 + 7 = 9, so return [0,1]
 ```python
 class Solution:
     def twoSum(self,nums,target):
@@ -852,7 +861,7 @@ class Solution(object):
                 return [i, nums.index(num,i+1)]
 
 ```
-给列表中的字典排序：假设有如下list对象，alist=[{"name":"a","age":20},{"name":"b","age":30},{"name":"c","age":25}],将alist中的元素按照age从大到小排序 alist=[{"name":"a","age":20},{"name":"b","age":30},{"name":"c","age":25}]
+Sort the dictionary in the list：Assume the following list object，alist=[{"name":"a","age":20},{"name":"b","age":30},{"name":"c","age":25}],Sort the elements in alist according to age from largest to smallest alist=[{"name":"a","age":20},{"name":"b","age":30},{"name":"c","age":25}]
 ```python
 alist_sort = sorted(alist,key=lambda e: e.__getitem__('age'),reverse=True)
 ```
@@ -1079,7 +1088,7 @@ https://appdividend.com/2019/01/22/python-super-function-example-super-method-tu
 
 #  Advanced Python
 ## Metaclass
-### 42. The difference between @classmethod 、类实例方法、静态方法有何区别？
+### 42. What is the difference between class instance methods and static methods?
 @classmethod: This decorator exists so you can create class methods that are passed the actual class object within the function call, much like self is passed to any other ordinary instance method in a class.
 
 Instance methods: Instance methods are the most common type of methods in Python classes. These are so called because they can access unique data of their instance. If you have two objects each created from a car class, then they each may have different properties. They may have different colors, engine sizes, seats, and so on. Instance methods must have self as a parameter, but you don’t need to pass this in every time. Self is another Python special term. Inside any instance method, you can use self to access any data or methods that may reside in your class. You won’t be able to access them without going through self.
