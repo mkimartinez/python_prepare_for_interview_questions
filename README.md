@@ -1417,11 +1417,29 @@ greet(whisper)
  Output : 
 HI, I AM CREATED BY A FUNCTION PASSED AS AN ARGUMENT.
 hi, i am created by a function passed as an argument.
-### 66.Python中pass语句的作用是什么？
+### 66. What is the role of the pass statement in Python？
 
-在编写代码时只写框架思路，具体实现还未编写就可以用pass进行占位，是程序不报错，不会进行任何操作。
+It is used as a dummy place holder whenever a syntactical requirement of a certain programming element is to be fulfilled without assigning any operation. In other words, the pass statement is simply ignored by the Python interpreter and can be seen as a null statement. It is generally used as a dummy statement in a code block, for example in the if or else block.
 
-### 67.有这样一段代码，print c会输出什么，为什么？
+The pass statement is commonly used in the early stages of program development to form a skeleton of the entire code. Initially, the programmer will create place holders with no operation using pass for various conditional statements, functions, classes etc., and eventually will fill their functionality.
+
+For example:
+```python
+for num in range(1,6):    
+    # using pass in a for loop    
+    if num==3:
+        pass
+    else:
+        print ("Num =  {} ".format(num))
+```
+
+```python
+def implement_later():
+    # using pass in a function
+    pass
+
+```
+### 67. Given the following code, what will be the output of print(c), why?
 
 ```python
 a = 10
@@ -1429,31 +1447,55 @@ b = 20
 c = [a]
 a = 15
 ```
+The output will be 10, strings and numbers passes their values
 
-答：10对于字符串，数字，传递是相应的值
+### 68. What are different way of Swaping the values of two variables？
 
-
-
-### 68.交换两个变量的值？
-
+Method 1
 ```python
 a, b = b, a
 ```
 
+Method 2:
+``` python
+def swap(a,b):
+    print(a,b)
+    c = a # create another variable c
+    a =b
+    b=c
+    return print(a,b)
+```
 
 
-### 69.map函数和reduce函数？
+### 69. Using map() and reduce() functions in Python？
 
 ```python
-map(lambda x: x * x, [1, 2, 3, 4])   # 使用 lambda
+# map() function returns a map object(which is an iterator) of the results after applying the given function to each item of a given iterable (list, tuple etc.)
+# syntax map(fun, iter)
+# fun : It is a function to which map passes each element of given iterable.
+# iter : It is a iterable which is to be mapped; list, tuple, dictionary, etc.
+map(lambda x: x * x, [1, 2, 3, 4])   # Using lambda
 # [1, 4, 9, 16]
-reduce(lambda x, y: x * y, [1, 2, 3, 4])  # 相当于 ((1 * 2) * 3) * 4
+
+# The reduce() function accepts a function and a sequence and returns a single value calculated as follows:
+
+# Initially, the function is called with the first two items from the sequence and the result is returned.
+# The function is then called again with the result obtained in step 1 and the next value in the sequence. This process keeps repeating until there are items in the sequence.
+# The syntax of the reduce() function is as follows:
+
+# Syntax: reduce(function, sequence[, initial]) -> value
+reduce(lambda x, y: x * y, [1, 2, 3, 4])  # Equals to ((1 * 2) * 3) * 4
 # 24
 ```
 
 
 
-### 70.回调函数，如何通信的?
+### 70.How the callback function communicates?
+
+A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
+The callback function passes the function pointer (address) as a parameter to another function, treat the entire function as an object, and assign it to the calling function.
+
+A callback takes two parameters: the LocalSolver object that triggers the event and the type of the callback. It is possible to use the same callback method or object for multiple events or multiple LocalSolver instances. The method can be a static function or a method on a class.
 
 回调函数是把函数的指针(地址)作为参数传递给另一个函数，将整个函数当作一个对象，赋值给调用的函数。
 
