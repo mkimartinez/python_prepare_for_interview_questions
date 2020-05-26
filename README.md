@@ -1291,7 +1291,7 @@ def timecheck(func):
         if datetime.datetime.now().year == 2019:
             func(*args, **kwargs)
         else:
-            raise TimeException("函数已过时")
+            raise TimeException("Function already expired")
 
     return wrapper
 
@@ -1304,46 +1304,55 @@ def test(name):
 if __name__ == "__main__":
     test("backbp")
 ```
-### 58.使用Python内置的filter()方法来过滤？
+### 58. Write a function to filter items from a list using the built-in filter() function？
 ```python
 list(filter(lambda x: x % 2 == 0, range(10)))
 ```
-### 59.编写函数的4个原则
+### 59. The four principles of writing a function in Python 编写函数的4个原则
 
-1.函数设计要尽量短小
+1. The function should be as short as possible
 
-2.函数声明要做到合理、简单、易于使用
+2. Function declarations should be reasonable, simple, and easy to use
 
-3.函数参数设计应该考虑向下兼容
+3. Function parameter design should consider backward compatibility
 
-4.一个函数只做一件事情，尽量保证函数语句粒度的一致性
+4.  Single-responsibility functions; Functions should do what they say they do—no more, no less.A function only does one thing, try to ensure the consistency of function statement granularity
 
-### 60.函数调用参数的传递方式是值传递还是引用传递？
+### 60. Is the function call parameter passed by value or by reference？
 
-Python的参数传递有：位置参数、默认参数、可变参数、关键字参数。
+Python parameter passing methods include: positional parameters, default parameters, variable parameters, keyword parameters
 
-函数的传值到底是值传递还是引用传递、要分情况：
+Whether the passing of value to a function is by value or by reference depends on the situation:
 
-不可变参数用值传递：像整数和字符串这样的不可变对象，是通过拷贝进行传递的，因为你无论如何都不可能在原处改变不可变对象。
+Immutable parameters are passed by value: immutable objects like integers and strings are passed by copy, because you cannot change the immutable object in place.
 
-可变参数是引用传递：比如像列表，字典这样的对象是通过引用传递、和C语言里面的用指针传递数组很相似，可变对象能在函数内部改变。
+Mutable parameters are passed by reference: for example, objects such as lists and dictionaries are passed by reference, which is very similar to passing arrays by pointers in C. Variable objects can be changed inside functions.
 
-### 61.如何在function里面设置一个全局变量
+### 61.How to set a global variable in function?
+Global variables are the one that are defined and declared outside a function and we need to use them inside a function.
 
+Rules of global keyword:
+1. If a variable is assigned a value anywhere within the function’s body, it’s assumed to be a local unless explicitly declared as global.
+2. Variables that are only referenced inside a function are implicitly global.
+3. We Use global keyword to use a global variable inside a function.
+4. There is no need to use global keyword outside a function.
 ```python
-globals() # 返回包含当前作用余全局变量的字典。
-global 变量 设置使用全局变量
+def define_global():
+    globals() # Return a dictionary containing the current global variables。
+    global variable_name # Set a global variable
+    return variable-name
 ```
 
-### 62.对缺省参数的理解 ？
+### 62. Understanding of default parameters ？
 
-缺省参数指在调用函数的时候没有传入参数的情况下，调用默认的参数，在调用函数的同时赋值时，所传入的参数会替代默认参数。
+The default parameter refers to the case where the default parameter is called when no parameter is passed in when calling the function. When the function parameter is assigned at the same time when calling the function, the incoming parameter will replace the default parameter.
+*args and **kwargs allow you to pass multiple arguments or keyword arguments to a function. 
 
-*args是不定长参数，它可以表示输入参数是不确定的，可以是任意多个。
+*args is an indefinite length parameter, which can indicate that the input parameter is uncertain, and can be any number。It allows you to pass a varying number of positional arguments. 
 
-**kwargs是关键字参数，赋值的时候是以键值对的方式，参数可以是任意多对在定义函数的时候
+** kwargs are keyword parameters. When assigning values, key-value pairs are used. Parameters can be any number of pairs when defining functions. **kwargs works just like *args, but instead of accepting positional arguments it accepts keyword (or named) arguments.
 
-不确定会有多少参数会传入时，就可以使用两个参数
+When you are not sure how many parameters will be passed in, you can use two parameters *args and **kwargs.
 
 ### 63.Mysql怎么限制IP访问？
 
