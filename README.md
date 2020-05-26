@@ -1468,20 +1468,20 @@ def swap(a,b):
 
 
 ### 69. Using map() and reduce() functions in Python？
-
+map() function returns a map object(which is an iterator) of the results after applying the given function to each item of a given iterable (list, tuple etc.)
+syntax map(fun, iter)
+    un : It is a function to which map passes each element of given iterable.
+    iter : It is a iterable which is to be mapped; list, tuple, dictionary, etc.
 ```python
-# map() function returns a map object(which is an iterator) of the results after applying the given function to each item of a given iterable (list, tuple etc.)
-# syntax map(fun, iter)
-# fun : It is a function to which map passes each element of given iterable.
-# iter : It is a iterable which is to be mapped; list, tuple, dictionary, etc.
+
 map(lambda x: x * x, [1, 2, 3, 4])   # Using lambda
 # [1, 4, 9, 16]
 
-# The reduce() function accepts a function and a sequence and returns a single value calculated as follows:
+The reduce() function accepts a function and a sequence and returns a single value calculated as follows:
 
-# Initially, the function is called with the first two items from the sequence and the result is returned.
-# The function is then called again with the result obtained in step 1 and the next value in the sequence. This process keeps repeating until there are items in the sequence.
-# The syntax of the reduce() function is as follows:
+Initially, the function is called with the first two items from the sequence and the result is returned.
+The function is then called again with the result obtained in step 1 and the next value in the sequence. This process keeps repeating until there are items in the sequence.
+The syntax of the reduce() function is as follows:
 
 # Syntax: reduce(function, sequence[, initial]) -> value
 reduce(lambda x, y: x * y, [1, 2, 3, 4])  # Equals to ((1 * 2) * 3) * 4
@@ -1497,53 +1497,94 @@ The callback function passes the function pointer (address) as a parameter to an
 
 A callback takes two parameters: the LocalSolver object that triggers the event and the type of the callback. It is possible to use the same callback method or object for multiple events or multiple LocalSolver instances. The method can be a static function or a method on a class.
 
-回调函数是把函数的指针(地址)作为参数传递给另一个函数，将整个函数当作一个对象，赋值给调用的函数。
+### 71. What are the main built-in data types in Python? What is the output of print dir (‘a’)?
 
-### 71.Python主要的内置数据类型都有哪些？ print dir( ‘a ’) 的输出？
+built-in data types：boolean，integer，string，list，Tuple，dictionary，set
 
-内建类型：布尔类型，数字，字符串，列表，元组，字典，集合
+The output is a string 'a'
 
-输出字符串'a'的内建方法
-
-### 72.map(lambda x:xx，[y for y in range(3)])的输出？
+### 72.What is the output of map(lambda x:xx，[y for y in range(3)])？
 
 ```
 [0, 1, 4]
 ```
 
-### 73.hasattr() getattr() setattr() 函数使用详解？
+### 73. What is the detailed use cases of the following functions hasattr(), getattr(), setattr()？
 
-hasattr(object,name)函数:
+hasattr(object,name)function: 
+hasattr() is an inbuilt utility function in Python whose main task is to check if an object has the given named attribute and return true if present, else false.
 
-判断一个对象里面是否有name属性或者name方法，返回bool值，有name属性（方法）返回True，否则返回False。
+Determines whether there is a name attribute or name method in an object, returns a bool value, returns True if there is a name attribute (method), otherwise returns False.
+Syntax : hasattr(obj, key)
+
+Parameters :
+    obj : The object whose which attribute has to be checked.
+    key : Attribute which needs to be checked.
+
+    Returns : Returns True, if attribute is present else returns False.
 
 ```python
-class function_demo(object):
+class Demo(object):
     name = 'demo'
     def run(self):
         return "hello function"
-functiondemo = function_demo()
-res = hasattr(functiondemo, "name") # 判断对象是否有name属性，True
-res = hasattr(functiondemo, "run") # 判断对象是否有run方法，True
-res = hasattr(functiondemo, "age") # 判断对象是否有age属性，False
+functiondemo = Demo()
+res = hasattr(functiondemo, "name") # Check if the class has name attribute，True
+res = hasattr(functiondemo, "run") # Check if  the class has run method，True
+res = hasattr(functiondemo, "age") # Check if the class has age attribute，False
 print(res)
 ```
 
-getattr(object, name[,default])函数：
+getattr(object, name[,default]) function：
 
-获取对象object的属性或者方法，如果存在则打印出来，如果不存在，打印默认值，默认值可选。注意：如果返回的是对象的方法，则打印结果是：方法的内存地址，如果需要运行这个方法，可以在后面添加括号().
+getattr() function is used to access the attribute value of an object and also give an option of executing the default value in case of unavailability of the key. This has greater application to check for available keys in web development and many other phases of day-to-day programming.
+
+Syntax : getattr(obj, key, def)
+
+Parameters :
+obj : The object whose attributes need to be processed.
+key : The attribute of object
+def : The default value that need to be printed in case attribute is not found.
+
+Returns :
+Object value if value is available, default value in case attribute is not present
+and returns AttributeError in case attribute is not present and default value is not
+specified.
 
 ```python
-functiondemo = function_demo()
-getattr(functiondemo, "name")# 获取name属性，存在就打印出来 --- demo
-getattr(functiondemo, "run") # 获取run 方法，存在打印出方法的内存地址
-getattr(functiondemo, "age") # 获取不存在的属性，报错
-getattr(functiondemo, "age", 18)# 获取不存在的属性，返回一个默认值
+functiondemo = Demo()
+getattr(functiondemo, "name")# Get the value of the name attribute，Print out if it exists --- demo
+getattr(functiondemo, "run") # Get run method，print out the memory address of the method if it exists
+getattr(functiondemo, "age") # Get non-existent attributes report errors
+getattr(functiondemo, "age", 18)# Get non-existent attributes，Returns the default value
 ```
 
-setattr(object, name, values)函数：
+setattr(object, name, values)function：
 
-给对象的属性赋值，若属性不存在，先创建再赋值
+setattr() is used to assign the object attribute its value. Apart from ways to assign values to class variables, through constructors and object functions, this method gives you an alternative way to assign value.
+setattr() can be used to assign None to any object attribute.
+setattr() can be used to initialize a new object attribute.
+Syntax : setattr(obj, var, val)
+
+Parameters :
+obj : Object whose which attribute is to be assigned.
+var : object attribute which has to be assigned.
+val : value with which variable is to be assigned.
+
+Returns 
+```python
+class Demo(object):
+    name = "demo"
+    def run(self):
+        return "hello function"
+functiondemo = Demo()
+res = hasattr(functiondemo, "age") # Check if age attribute exists，False
+print(res)
+setattr(functiondemo, "age", 18) # sets the value of age attribute，No return value
+res1 = hasattr(functiondemo, "age") # Determine if the attribute exists again，True
+```
+
+Comprehensive usecase
 
 ```python
 class function_demo(object):
@@ -1551,21 +1592,7 @@ class function_demo(object):
     def run(self):
         return "hello function"
 functiondemo = function_demo()
-res = hasattr(functiondemo, "age") # 判断age属性是否存在，False
-print(res)
-setattr(functiondemo, "age", 18) # 对age属性进行赋值，无返回值
-res1 = hasattr(functiondemo, "age") # 再次判断属性是否存在，True
-```
-
-综合使用
-
-```python
-class function_demo(object):
-    name = "demo"
-    def run(self):
-        return "hello function"
-functiondemo = function_demo()
-res = hasattr(functiondemo, "addr") # 先判断是否存在
+res = hasattr(functiondemo, "addr") # First determine whether it exists
 if res:
     addr = getattr(functiondemo, "addr")
     print(addr)
