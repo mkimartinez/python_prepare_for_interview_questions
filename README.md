@@ -1260,13 +1260,10 @@ Function overloading is mainly to solve two problems.
 1。Variable parameter types。
 2。Variable number of parameters。
 
-另外，一个基本的设计原则是，仅仅当两个函数除了参数类型和参数个数不同以外，其功能是完全相同的，此时才使用函数重载，如果两个函数的功能其实不同，那么不应当使用重载，而应当使用一个名字不同的函数。
 In addition, a basic design principle is that only when the two functions except the parameter type and the number of parameters are the same, then use function overloading, if the functions of the two functions are actually different, then not You should use overloading, and you should use a function with a different name.
 
-好吧，那么对于情况 1 ，函数功能相同，但是参数类型不同，python 如何处理？答案是根本不需要处理，因为 python 可以接受任何类型的参数，如果函数的功能相同，那么不同的参数类型在 python 中很可能是相同的代码，没有必要做成两个不同函数。
 Okay, so for case 1, the function is the same, but the parameter type is different, how does Python handle it? The answer is that there is no need to deal with it at all, because Python can accept any type of parameter. If the function of the function is the same, then the different parameter types are likely to be the same code in Python, and there is no need to make two different functions.
 
-那么对于情况 2 ，函数功能相同，但参数个数不同，python 如何处理？大家知道，答案就是缺省参数。对那些缺少的参数设定为缺省参数即可解决问题。因为你假设函数功能相同，那么那些缺少的参数终归是需要用的。
 So for case 2, the function is the same, but the number of parameters is different, how does Python handle it? As you know, the answer is the default parameters. Set the default parameters for those missing parameters to solve the problem. Because you assume that functions have the same function, those missing parameters are needed after all.
 
 好了，鉴于情况 1 跟 情况 2 都有了解决方案，python 自然就不需要函数重载了。
@@ -1354,55 +1351,72 @@ The default parameter refers to the case where the default parameter is called w
 
 When you are not sure how many parameters will be passed in, you can use two parameters *args and **kwargs.
 
-### 63.Mysql怎么限制IP访问？
+### 63. How to limit IP access in MYSQL？
+GRANT ALL PRIVILEGES ON * . * TO  'ryan'@'IP OF EXTERNAL SERVER'
 
 
+### 64.Decorators with parameters?
 
-### 64.带参数的装饰器?
-
-带定长参数的装饰器
+Decorators with fixed-length parameters
 
 ```python
 def new_func(func):
     def wrappedfun(username, passwd):
         if username == 'root' and passwd == '123456789':
-            print('通过认证')
-            print('开始执行附加功能')
+            print('Certified')
+            print('Start performing additional functions')
             return func()
        	else:
-            print('用户名或密码错误')
+            print('Incorrect username or password')
             return
     return wrappedfun
 
 @new_func
 def origin():
-    print('开始执行函数')
+    print('Start executing the function')
 origin('root','123456789')
 ```
 
-带不定长参数的装饰器
+Decorators with variable length parameters
 
 ```python
 def new_func(func):
     def wrappedfun(*parts):
         if parts:
             counts = len(parts)
-            print('本系统包含 ', end='')
+            print('This system included ', end='')
             for part in parts:
                 print(part, ' ',end='')
-            print('等', counts, '部分')
+            print('etc', counts, 'part')
             return func()
         else:
-            print('用户名或密码错误')
+            print('Incorrect username or password')
             return func()
    return wrappedfun
 
 ```
 
-### 65.为什么函数名字可以当做参数用?
-
-Python中一切皆对象，函数名是函数在内存中的空间，也是一个对象
-
+### 65. Why function names can be used as parameters?
+Everything in Python is an object, the function name is the space of the function in memory, and it is also an object. Because functions are objects we can pass them as arguments to other functions. Functions that can accept other functions as arguments are also called higher-order functions. 
+# Python program to illustrate functions can be passed as arguments to other functions  
+```python
+def shout(text):  
+    return text.upper()  
+  
+def whisper(text):  
+    return text.lower()  
+  
+def greet(func):  
+    # storing the function in a variable  
+    greeting = func("Hi, I am created by a function passed as an argument.")  
+    print(greeting) 
+  
+greet(shout)  
+greet(whisper) 
+```
+ Output : 
+HI, I AM CREATED BY A FUNCTION PASSED AS AN ARGUMENT.
+hi, i am created by a function passed as an argument.
 ### 66.Python中pass语句的作用是什么？
 
 在编写代码时只写框架思路，具体实现还未编写就可以用pass进行占位，是程序不报错，不会进行任何操作。
