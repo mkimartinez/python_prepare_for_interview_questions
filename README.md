@@ -20,7 +20,7 @@ With more python interview questions.
     + [13. Write python code to delete duplicate elements from a list？](#13-write-python-code-to-delete-duplicate-elements-from-a-list-)
     + [14.Given two lists A，B ,Find elements that are similar and different in list A and list B](#14given-two-lists-a-b--find-elements-that-are-similar-and-different-in-list-a-and-list-b)
   * [Enterprise interview questions](#enterprise-interview-questions)
-    + [15.What is the difference between new style class and the classic class in python？](#15What-is-the-difference-between-new-style-class-and-the-classic-class-in python)
+    - [15.What is the difference between new style class and the classic class in python？](#15what-is-the-difference-between-new-style-class-and-the-classic-class-in-python-)
     + [16.What are built-in data types in Python？](#16what-are-built-in-data-types-in-python-)
     + [17. How to implement singleton mode in Python? Please write two ways of implementation?](#17-how-to-implement-singleton-mode-in-python--please-write-two-ways-of-implementation-)
         + [18. Write a class with a function to reverse the input. For example; -123 --> -321](#18-write-a-class-with-a-function-to-reverse-the-input-for-example---123------321)
