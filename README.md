@@ -13,16 +13,88 @@
     + [8. Process the string "k: 1 | k1: 2 | k2: 3 | k3: 4" into a dictionary {k: 1, k1: 2, ...}](#8-process-the-string--k--1---k1--2---k2--3---k3--4--into-a-dictionary--k--1--k1--2---)
     + [9. Please sort by the age of the elements in alist from largest to smallest](#9-please-sort-by-the-age-of-the-elements-in-alist-from-largest-to-smallest)
     + [10.What is the output of the following code？](#10what-is-the-output-of-the-following-code-)
-    + [11.Write a list generator](#11write-a-list-generator-----------------11-----)
+    + [11.Write a list generator to generate an arithmetic sequence with dommon difference of 11](#11write-a-list-generator-to- generate-an-arithmetic-sequence-with-dommon-difference-of-11)
     + [12. Given two lists, write a function to find out the same elements and different elements from the two lists](#12-given-two-lists--write-a-function-to-find-out-the-same-elements-and-different-elements-from-the-two-lists)
     + [13. Write python code to delete duplicate elements from a list？](#13-write-python-code-to-delete-duplicate-elements-from-a-list-)
     + [14.Given two lists A，B ,Find elements that are similar and different in list A and list B](#14given-two-lists-a-b--find-elements-that-are-similar-and-different-in-list-a-and-list-b)
   * [Enterprise interview questions](#enterprise-interview-questions)
-    + [15.python新式类和经典类的区别？](#15python-----------)
+    + [15.What is the difference between new style class and the classic class in python？](#15What-is-the-difference-between-new-style-class-and-the-classic-class-in python)
     + [16.What are built-in data types in Python？](#16what-are-built-in-data-types-in-python-)
     + [17. How to implement singleton mode in Python? Please write two ways of implementation?](#17-how-to-implement-singleton-mode-in-python--please-write-two-ways-of-implementation-)
+        + [18. Write a class with a function to reverse the input. For example; -123 --> -321](#18-write-a-class-with-a-function-to-reverse-the-input-for-example---123------321)
+    + [19. Design a function to traverse a directory and grap all the files with the specified extension](#19-design-a-function-to-traverse-a-directory-and-grap-all-the-files-with-the-specified-extension)
+    + [20.Calculate the sum of (1-100) using one line of code](#20calculate-the-sum-of--1-100--using-one-line-of-code)
+    + [21.Write a Python function to delete elements when traversing a list](#21write-a-python-function-to-delete-elements-when-traversing-a-list)
+    + [22. String operation problems](#22-string-operation-problems)
+    + [23.Mutable and Immutable data types](#23mutable-and-immutable-data-types)
+    + [24.What is the difference between "is" and "==" in python？](#24what-is-the-difference-between--is--and------in-python-)
+    + [25. Find all odd numbers in a list and construct a new list](#25-find-all-odd-numbers-in-a-list-and-construct-a-new-list)
+    + [26. write one line of code to generate 1+2+3+10248](#26-write-one-line-of-code-to-generate-1-2-3-10248)
+    + [27.Variable scopes in python？（Variable search order)](#27variable-scopes-in-python--variable-search-order-)
+    + [28. The string "123" is converted to '123' without using built-in functions such as 'int()'](#28-the-string--123--is-converted-to--123--without-using-built-in-functions-such-as--int---)
+    + [29.Given an array of integers](#29given-an-array-of-integers)
+    + [30.python code to remove duplicate element from a list](#30python-code-to-remove-duplicate-element-from-a-list)
+    + [31. Count the 10 most frequent words in a text？](#31-count-the-10-most-frequent-words-in-a-text-)
+    + [32.Please write a function that meets the following conditions](#32please-write-a-function-that-meets-the-following-conditions)
+    + [33.Use a single list generator to generate a new list](#33use-a-single-list-generator-to-generate-a-new-list)
+    + [34.Generate the following list [1,4,9,16,25,36,49,64,81,100] using one line of code](#34generate-the-following-list--1-4-9-16-25-36-49-64-81-100--using-one-line-of-code)
+    + [35.Write a function that takes the year, month and day as the input and outputs the day of the year？](#35write-a-function-that-takes-the-year--month-and-day-as-the-input-and-outputs-the-day-of-the-year-)
+    + [36.Merge two ordered list l1,l2 without using extend function](#36merge-two-ordered-list-l1-l2-without-using-extend-function)
+    + [37.Given an array of arbitrary length, implement a function](#37given-an-array-of-arbitrary-length--implement-a-function)
+    + [38. Write a function to find the second largest number in an integer array](#38-write-a-function-to-find-the-second-largest-number-in-an-integer-array)
+    + [39.What is the output of the following function？](#39what-is-the-output-of-the-following-function-)
+    + [40. Count the number of occurrences of characters in a string](#40-count-the-number-of-occurrences-of-characters-in-a-string)
+    + [41. What are some specific use cases of super() function](#41-what-are-some-specific-use-cases-of-super---function)
+- [Advanced Python](#advanced-python)
+  * [Metaclass](#metaclass)
+    + [42. What is the difference between class instance methods and static methods?](#42-what-is-the-difference-between-class-instance-methods-and-static-methods-)
+    + [44.Write a class that supports as many operators as possible?](#44write-a-class-that-supports-as-many-operators-as-possible-)
+    + [45.Describe the drawbacks of Cython，Pypy Cpython Numba](#45describe-the-drawbacks-of-cython-pypy-cpython-numba)
+    + [46.Please describe the difference and connection between abstract class and interface class](#46please-describe-the-difference-and-connection-between-abstract-class-and-interface-class)
+    + [47. How to dynamically get and set the attributes of an object in Python？](#47-how-to-dynamically-get-and-set-the-attributes-of-an-object-in-python-)
+  * [Memory management and garbage collection mechanism](#memory-management-and-garbage-collection-mechanism)
+    + [48.What operations will cause Python memory overflow, how to deal with those causes？](#48what-operations-will-cause-python-memory-overflow--how-to-deal-with-those-causes-)
+    + [49.Regarding Python memory management, which of the following statements is wrong  B](#49regarding-python-memory-management--which-of-the-following-statements-is-wrong--b)
+    + [50.Python's memory management mechanism and tuning methods？](#50python-s-memory-management-mechanism-and-tuning-methods-)
+    + [51. What is a memory leak? How to avoid it?](#51-what-is-a-memory-leak--how-to-avoid-it-)
+  * [Python functions](#python-functions)
+    + [52.What are common list comprehensions？](#52what-are-common-list-comprehensions-)
+    + [53.Describe the difference among read、readline、readlines？](#53describe-the-difference-among-read-readline-readlines-)
+    + [54.What is a Hash function？](#54what-is-a-hash-function-)
+    + [55.Python function overloading mechanism？](#55python-function-overloading-mechanism-)
+    + [56.Write a function to find the second largest number in an integer array](#56write-a-function-to-find-the-second-largest-number-in-an-integer-array)
+    + [57.Write a decorator function to determine the current time](#57write-a-decorator-function-to-determine-the-current-time)
+    + [58. Write a function to filter items from a list using the built-in filter() function？](#58-write-a-function-to-filter-items-from-a-list-using-the-built-in-filter---function-)
+    + [59. The four principles of writing a function in Python](#59-the-four-principles-of-writing-a-function-in-python)
+    + [60. Is the function call parameter passed by value or by reference？](#60-is-the-function-call-parameter-passed-by-value-or-by-reference-)
+    + [61.How to set a global variable in function?](#61how-to-set-a-global-variable-in-function-)
+    + [62. Understanding of default parameters ？](#62-understanding-of-default-parameters--)
+    + [63. How to limit IP access in MYSQL？](#63-how-to-limit-ip-access-in-mysql-)
+    + [64.Decorators with parameters?](#64decorators-with-parameters-)
+    + [65. Why function names can be used as parameters?](#65-why-function-names-can-be-used-as-parameters-)
+- [Python program to illustrate functions can be passed as arguments to other functions](#python-program-to-illustrate-functions-can-be-passed-as-arguments-to-other-functions)
+    + [66. What is the role of the pass statement in Python？](#66-what-is-the-role-of-the-pass-statement-in-python-)
+    + [67. Given the following code, what will be the output of print(c), why?](#67-given-the-following-code--what-will-be-the-output-of-print-c---why-)
+    + [68. What are different way of Swaping the values of two variables？](#68-what-are-different-way-of-swaping-the-values-of-two-variables-)
+    + [69. Using map() and reduce() functions in Python？](#69-using-map---and-reduce---functions-in-python-)
+    + [70.How the callback function communicates?](#70how-the-callback-function-communicates-)
+    + [71. What are the main built-in data types in Python? What is the output of print dir (‘a’)?](#71-what-are-the-main-built-in-data-types-in-python--what-is-the-output-of-print-dir---a---)
+    + [72.What is the output of map(lambda x:xx，[y for y in range(3)])？](#72what-is-the-output-of-map-lambda-x-xx--y-for-y-in-range-3----)
+    + [73. What is the detailed use cases of the following functions hasattr(), getattr(), setattr()？](#73-what-is-the-detailed-use-cases-of-the-following-functions-hasattr----getattr----setattr---)
+    + [74.Solve the factorial function using one line of code？](#74solve-the-factorial-function-using-one-line-of-code-)
+    + [75. What is a lambda function？ What are the benefits of using lambda function？](#75-what-is-a-lambda-function--what-are-the-benefits-of-using-lambda-function-)
+    + [76. What are the termination conditions for recursive functions？](#76-what-are-the-termination-conditions-for-recursive-functions-)
+    + [77.What will be the output of the following code? Please explain.](#77what-will-be-the-output-of-the-following-code--please-explain)
+- [Method 1:](#method-1-)
+- [Method 2:](#method-2-)
+    + [78. What is a lambda function? What are the benefits? Write an anonymous function to find the sum of two numbers](#78-what-is-a-lambda-function--what-are-the-benefits--write-an-anonymous-function-to-find-the-sum-of-two-numbers)
+  * [Python Design Patterns](#python-design-patterns)
+    + [79. Understanding of design patterns, briefly describe the design patterns you understand？](#79-understanding-of-design-patterns--briefly-describe-the-design-patterns-you-understand-)
+    + [80.Write one singleton class](#80write-one-singleton-class)
+    + [81.What are some common usecases of singleton design pattern？](#81what-are-some-common-usecases-of-singleton-design-pattern-)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 - [Python Basics](#python Basics)
     - [Working with files](#Working with files)
@@ -479,8 +551,7 @@ list = ['a','b','c','d','e']
 print(list[10:])
 ```
 The code will output []; an empty list, and no IndexError will be generated. As expected, try to get the members of a list with an index that exceeds the number of members. For example, trying to get members of list [10] and later will cause IndexError: "list index out of range". However, when trying to get a slice of the list, the index will not exceed the number of members at the beginning of the indexError, but only returns an empty list. This becomes a particularly disgusting and intractable disease, because no errors are generated during operation, making it difficult to debug.
-### 11.Write a list generator 写一个列表生成式，产生一个公差为11的等差数列
-Write a list generator to produce an arithmetic sequence with a tolerance of 11
+### 11.Write a list generator， to generate an arithmetic sequence whose common difference is 11
 ```python
 print([x*11 for x in range(10)])
 ```
@@ -527,18 +598,16 @@ A,B Similar elements： print(set(A)&set(B))
 A,B different elements:  print(set(A)^set(B))
 ```
 ## Enterprise interview questions
-### 15.python新式类和经典类的区别？
-a. 在python里凡是继承了object的类，都是新式类
+### 15.What is the difference between new style class and the classic class in python？
+a. In python, all classes that inherit object are new-style classes
 
-b. Python3里只有新式类
+b. Python3 only has new-style classes
 
-c. Python2里面继承object的是新式类，没有写父类的是经典类
+c. In Python2, the inherited object is a new-style class, the parent class is not a classic class
 
-d. 经典类目前在Python里基本没有应用
+d. Classic class is basically not used in Python
 
-e. 保持class与type的统一对新式类的实例执行a.__class__与type(a)的结果是一致的，对于旧式类来说就不一样了。
-
-f.对于多重继承的属性搜索顺序不一样新式类是采用广度优先搜索，旧式类采用深度优先搜索。
+e.The search order of attributes for multiple inheritance is different. The new type uses breadth-first search, and the old type uses depth-first search.
 
 ### 16.What are built-in data types in Python？
 a.  int、  long、 float、  complex
@@ -547,7 +616,7 @@ b.  str、 list、  tuple
 
 c. dict 、  set
 
-d. Python3 中没有 long，只有无限精度的 int
+d. Python3 has no long data type，Only has infinite precision int
 
 ### 17. How to implement singleton mode in Python? Please write two ways of implementation?
 The singleton pattern is a design pattern that restricts the instantiation of a class to one object. It is a way to provide one and only one object of a particular type. It involves only one class to create methods and specify the objects.
