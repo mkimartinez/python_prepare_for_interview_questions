@@ -1,4 +1,28 @@
 <!-- TOC -->
+- [Python-Basics](#python-basics)
+  * [Working with files](#working-with-files)
+    + [1. There is a json file with about 10K lines of data, write a function to read and process the data](#1-there-is-a-json-file-with-about-10k-lines-of-data--write-a-function-to-read-and-process-the-data)
+    + [2.Fill in the missing code](#2fill-in-the-missing-code)
+  * [Modules and Libraries](#modules-and-libraries)
+    + [3.Enter the date， Output the day, month and year？](#3enter-the-date--output-the-day--month-and-year-)
+    + [4.write a function to shuffle elements of a sorted list？](#4write-a-function-to-shuffle-elements-of-a-sorted-list-)
+  * [Data types](#data-types)
+    + [5.Given a dictionary d= {'a':24,'g':52,'i':12,'k':33}; Sort based on values?](#5given-a-dictionary-d----a--24--g--52--i--12--k--33---sort-based-on-values-)
+    + [6. Dictionary Comprehensions](#6-dictionary-comprehensions)
+    + [7.Write a function to reverse a given string "aStr"?](#7write-a-function-to-reverse-a-given-string--astr--)
+    + [8. Process the string "k: 1 | k1: 2 | k2: 3 | k3: 4" into a dictionary {k: 1, k1: 2, ...}](#8-process-the-string--k--1---k1--2---k2--3---k3--4--into-a-dictionary--k--1--k1--2---)
+    + [9. Please sort by the age of the elements in alist from largest to smallest](#9-please-sort-by-the-age-of-the-elements-in-alist-from-largest-to-smallest)
+    + [10.What is the output of the following code？](#10what-is-the-output-of-the-following-code-)
+    + [11.Write a list generator](#11write-a-list-generator-----------------11-----)
+    + [12. Given two lists, write a function to find out the same elements and different elements from the two lists](#12-given-two-lists--write-a-function-to-find-out-the-same-elements-and-different-elements-from-the-two-lists)
+    + [13. Write python code to delete duplicate elements from a list？](#13-write-python-code-to-delete-duplicate-elements-from-a-list-)
+    + [14.Given two lists A，B ,Find elements that are similar and different in list A and list B](#14given-two-lists-a-b--find-elements-that-are-similar-and-different-in-list-a-and-list-b)
+  * [Enterprise interview questions](#enterprise-interview-questions)
+    + [15.python新式类和经典类的区别？](#15python-----------)
+    + [16.What are built-in data types in Python？](#16what-are-built-in-data-types-in-python-)
+    + [17. How to implement singleton mode in Python? Please write two ways of implementation?](#17-how-to-implement-singleton-mode-in-python--please-write-two-ways-of-implementation-)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 - [Python Basics](#python Basics)
     - [Working with files](#Working with files)
@@ -1603,7 +1627,7 @@ else:
 
 
 
-### 74.一句话解决阶乘函数？
+### 74.Solve the factorial function using one line of code？
 
 ```
 reduce(lambda x,y : x*y,range(1,n+1))
@@ -1611,25 +1635,31 @@ reduce(lambda x,y : x*y,range(1,n+1))
 
 
 
-### 75.什么是lambda函数？ 有什么好处？
+### 75. What is a lambda function？ What are the benefits of using lambda function？
 
-lambda 函数是一个可以接收任意多个参数(包括可选参数)并且返回单个表达式值的函数
+A lambda function is a small anonymous function. It can take any number of arguments, but can only have one expression.  The lambda keyword is used to create anonymous functions.
+Syntax: lambda arguments: expression
+This function can have any number of arguments but only one expression, which is evaluated and returned.
+One is free to use lambda functions wherever function objects are required.
+You need to keep in your knowledge that lambda functions are syntactically restricted to a single expression.
+It has various uses in particular fields of programming besides other types of expressions in functions.
 
-1.lambda函数比较轻便，即用即仍，很适合需要完成一项功能，但是此功能只在此一处使用，连名字都很随意的情况下
+The benefits include:
+1.lambda function is relatively portable, ready to use, very suitable for the need to complete a function, but this function is only used in this place, even if the name is very random
 
-2.匿名函数，一般用来给filter，map这样的函数式编程服务
+2.Anonymous function，Generally used to provide functional programming services functions such as filter and map
 
-3.作为回调函数，传递给某些应用，比如消息处理
+3.As a callback function, passed to some applications, such as message processing
 
-### 76.递归函数停止的条件？
+### 76. What are the termination conditions for recursive functions？
+In programming terms a recursive function can be defined as a routine that calls itself directly or indirectly.
+The termination condition of recursion is generally defined inside the recursive function. A conditional judgment is made before the recursive call. According to the result of the judgment, choose whether to continue calling itself or return, and return to terminate recursion.
 
-递归的终止条件一般定义在递归函数内部，在递归调用前要做一个条件判断，根据判断的结果选择是继续调用自身，还是return，，返回终止递归。
+1.Termination conditions: determine whether the number of recursion reaches a certain limit
 
-终止的条件：判断递归的次数是否达到某一限定值
+2.Determine whether the result of the operation reaches a certain range, etc., choose according to the purpose of the design
 
-2.判断运算的结果是否达到某个范围等，根据设计的目的来选择
-
-### 77.下面这段代码的输出结果将是什么？请解释。
+### 77.What will be the output of the following code? Please explain.
 
 ```python
 def multipliers():
@@ -1638,39 +1668,46 @@ def multipliers():
 
 ```
 
-上面代码的输出结果是[6,6,6,6]，不是我们想的[0,2,4,6]
+The output of the above code is [6,6,6,6], not [0,2,4,6]
 
-你如何修改上面的multipliers的定义产生想要的结果？
+How do you modify the multipliers() function above to return the desired result？
 
-上述问题产生的原因是python闭包的延迟绑定。这意味着内部函数被调用时，参数的值在闭包内进行查找。因此，当任何由multipliers()返回的函数被调用时,i的值将在附近的范围进行查找。那时，不管返回的函数是否被调用，for循环已经完成，i被赋予了最终的值3.
+The reason for the above problem is the late binding of Python closures. This means that when the internal function is called, the value of the parameter is searched in the closure. Therefore, when any function returned by multipliers () is called, the value of i will be searched in the nearby range. At that time, regardless of whether the returned function is called, the for loop has completed and i is given the final value of 3.
 
+# Method 1:
 ```python
 def multipliers():
     for i in range(4):
         yield lambda x: i *x
 ```
 
+# Method 2:
 ```python
 def multipliers():
     return [lambda x,i = i: i*x for i in range(4)]
 
 ```
 
+### 78. What is a lambda function? What are the benefits? Write an anonymous function to find the sum of two numbers
 
+The lambda function is an anonymous function. This function is named after omitting the standard step of declaring a function with def
 
+```python
+add = lambda x, y : x + y
+ 
+print(add(10, 20))
 
+```
 
-### 78.什么是lambda函数？它有什么好处？写一个匿名函数求两个数的和
+##  Python Design Patterns
+### 79. Understanding of design patterns, briefly describe the design patterns you understand？
 
-lambda函数是匿名函数，使用lambda函数能创建小型匿名函数，这种函数得名于省略了用def声明函数的标准步骤
+Design pattern is summarized, optimized, and reusable solution to some programming problems we often encounter. A design pattern does not directly affect our code like a class or a library. On the contrary, the design pattern is more advanced. It is a method template that must be implemented in a specific situation.
+Common design patterns are the factory pattern and singleton pattern
+### 80.Write one singleton class
 
-
-##  设计模式
-### 79.对设计模式的理解，简述你了解的设计模式？
-设计模式是经过总结，优化的，对我们经常会碰到的一些编程问题的可重用解决方案。一个设计模式并不像一个类或一个库那样能够直接作用于我们的代码，反之，设计模式更为高级，它是一种必须在特定情形下实现的一种方法模板。
-常见的是工厂模式和单例模式
-
-### 80.请手写一个单例
+Singleton Method is a type of Creational Design pattern and is one of the simplest design pattern available to us. It is a way to provide one and only one object of a particular type. It involves only one class to create methods and specify the objects.
+Singleton Design Pattern can be understood by a very simple example of Database connectivity. When each object creates a unique Database Connection to the Database, it will highly affect the cost and expenses of the project. So, it is always better to make a single connection rather than making extra irrelevant connections which can be easily done by Singleton Design Pattern.
 ```python
 #python2
 class A(object):
@@ -1682,10 +1719,15 @@ class A(object):
         else:
             return cls.__instance
 ```
-### 81.单例模式的应用场景有那些？
-单例模式应用的场景一般发现在以下条件下：
-资源共享的情况下，避免由于资源操作时导致的性能或损耗等，如日志文件，应用配置。
-控制资源的情况下，方便资源之间的互相通信。如线程池等，1,网站的计数器 2,应用配置 3.多线程池 4数据库配置 数据库连接池 5.应用程序的日志应用...
+### 81.What are some common usecases of singleton design pattern？
+Singleton pattern application scenarios are generally found under the following conditions:
+In the case of resource sharing, avoid performance or loss due to resource operations, such as log files and application configuration.
+In the case of controlling resources, it is convenient to communicate with each other. Such as thread pool, etc. 
+1. website counter 
+2. application configuration 
+3. multi-thread pool 
+4. database configuration, database connection pool 
+5. application log  etc
 ### 82.用一行代码生成[1,4,9,16,25,36,49,64,81,100]
 ```python
 print([x*x for x in range(1, 11)])
@@ -2651,7 +2693,7 @@ Scrapy优点：异步，xpath，强大的统计和log系统，支持不同url。
 
 超键：在关系中能唯一标识元组的属性集称为关系模式的超键。一个属性可以作为一个超键，多个属性组合在一起也可以作为一个超键。超键包含候选键和主键。
 
-候选键：是最小超键，即没有冗余元素的超键。
+候选键：是最小超键，即没有冗余元素的超键��
 
 外键：在一个表中存在的另一个表的主键称此表的外键。
 
