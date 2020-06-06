@@ -1306,7 +1306,7 @@ if __name__ == "__main__":
 ```python
 list(filter(lambda x: x % 2 == 0, range(10)))
 ```
-### 59. The four principles of writing a function in Python 编写函数的4个原则
+### 59. The four principles of writing a function in Python
 
 1. The function should be as short as possible
 
@@ -1598,7 +1598,7 @@ if res:
     addr = getattr(functiondemo, "addr")
     print(addr)
 else:
-    addr = getattr(functiondemo, "addr", setattr(functiondemo, "addr", "北京首都"))
+    addr = getattr(functiondemo, "addr", setattr(functiondemo, "addr", "Nairobi"))
     print(addr)
 ```
 
@@ -1705,12 +1705,13 @@ In the case of controlling resources, it is convenient to communicate with each 
 3. multi-thread pool 
 4. database configuration, database connection pool 
 5. application log  etc
-### 82.用一行代码生成[1,4,9,16,25,36,49,64,81,100]
+### 82.Use one line of code to generate [1,4,9,16,25,36,49,64,81,100]
 ```python
 print([x*x for x in range(1, 11)])
 ```
-### 83.对装饰器的理解，并写出一个计时器记录方法执行性能���装饰器？
-装饰器本质上是一个callable object ，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。
+### 83.Explain your understanding of decorators，write a  decorator function to record the time taken to execute a function？
+By definition, a decorator is a function that takes another function and extends the behavior of the latter function without explicitly modifying it. The return value of the decorator is also a function object.
+In Decorators, functions are taken as the argument into another function and then called inside the wrapper function.
 
 ```python
 import time
@@ -1730,64 +1731,98 @@ def timeit(func):
 def foo():
     print('in foo()'foo())
 ```
-### 84.解释以下什么是闭包？
-在函数内部再定义一个函数，并且这个函数用到了外边函数的变量，那么将这个函数以及用到的一些变量称之为闭包。
+### 84. Explain what is a closure？
+A closure is a nested function which has access to a free variable from an enclosing function that has finished its execution. Three characteristics of a Python closure are:
 
-### 85.函数装饰器有什么作用？
-装饰器本质上是一个callable object，它可以在让其他函数在不需要做任何代码的变动的前提下增加额外的功能。装饰器的返回值也是一个函数的对象，它经常用于有切面需求的场景。比如：插入日志，性能测试，事务处理，缓存。权限的校验等场景，有了装饰器就可以抽离出大量的与函数功能本身无关的雷同代码并发并继续使用。
-详细参考：https://manjusaka.itscoder.com/2018/02/23/something-about-decorator/
+1. it is a nested function
+2. it has access to a free variable in outer scope, A free variable is a variable that is not bound in the local scope.
+3. it is returned from the enclosing function
+Python closures help avoiding the usage of global values and provide some form of data hiding. They are used in Python decorators.
 
-### 86.生成器，迭代器的区别？
-迭代器是遵循迭代协议的对象。用户可以使用 iter() 以从任何序列得到迭代器（如 list, tuple, dictionary, set 等）。另一个方法则是创建一个另一种形式的迭代器 —— generator 。要获取下一个元素，则使用成员函数 next()（Python 2）或函数 next() function （Python 3） 。当没有元素时，则引发 StopIteration 此例外。若要实现自己的迭代器，则只要实现 next()（Python 2）或 `__next__`()（ Python 3）
+### 85. What are the uses of function decorators？
+Decorators allow you to define reusable building blocks that can change or extend the behavior of other functions. And they let you do that without permanently modifying the wrapped function itself.
+The return value of the decorator is also a function object, which is often used in scenes that have aspect requirements.
+Some common use cases of python decorators include:
+1. logging,
+2. enforcing access control and authentication,
+3. instrumentation and timing functions,
+4. rate-limiting,
+5. caching,
+6. Permission verification etc
+Reference：https://manjusaka.itscoder.com/2018/02/23/something-about-decorator/
 
-生成器（Generator），只是在需要返回数据的时候使用yield语句。每次next()被调用时，生成器会返回它脱离的位置（它记忆语句最后一次执行的位置和所有的数据值）
+### 86.What is the difference between generators and iterators？
+Iterators are objects that follow the iteration protocol. Users can use iter () to get iterators from any sequence (such as list, tuple, dictionary, set, etc.). Another method is to create an iterator of another form-generator. To get the next element, use the member function next () (Python 2) or the function next () (Python 3). When there are no elements, the StopIteration exception is raised. To implement your own iterator, just implement next () (Python 2) or `__next__` () (Python 3)
 
+Generator, just use the yield statement when you need to return data. Each time next () is called, the generator will return the position where it left off (it remembers the position where the statement was last executed and all data values)
 
-区别： 生成器能做到迭代器能做的所有事，而且因为自动创建iter()和next()方法，生成器显得特别简洁，而且生成器也是高效的，使用生成器表达式取代列表解析可以同时节省内存。除了创建和保存程序状态的自动方法，当发生器终结时，还会自动抛出StopIteration异常。
+Difference: The generator can do everything the iterator can do, and because the iter () and next () methods are automatically created, the generator is particularly concise, and the generator is also efficient. Use generator expressions instead of list parsing. At the same time save memory. In addition to the automatic method of creating and saving program state, when the generator ends, it will automatically throw a StopIteration exception.
 
-官方介绍：https://docs.python.org/3/tutorial/classes.html#iterators
-### 87.X是什么类型?
+Official documentation：https://docs.python.org/3/tutorial/classes.html#iterators
+### 87.What is the data type of x?
     X= (i for i in range(10))
-    X是 generator类型
-### 88.请用一行代码 实现将1-N 的整数列表以3为单位分组
+    X is a generator 
+### 88. Use one line of code to group the 1-N integer lists in units of 3.
 ```python
 N =100
 print ([[x for x in range(1,100)] [i:i+3] for i in range(0,100,3)])
 ```
-### 89.Python中yield的用法?
-yield就是保存当前程序执行状态。你用for循环的时候，每次取一个元素的时候就会计算一次。用yield的函数叫generator,和iterator一样，它的好处是不用一次计算所有元素，而是用一次算一次，可以节省很多空间，generator每次计算需要上一次计算结果，所以用yield,否则一return，上次计算结果就没了
-## 面向对象
-### 90.Python中的可变对象和不可变对象？
+### 89.What is the use of "yield" in Python?
+yield is a keyword in Python that is used to return from a function without destroying the states of its local variable and when the function is called, the execution starts from the last yield statement. Any function that contains a yield keyword is termed as generator. Hence, yield is what makes a generator.
 
-不可变对象，该对象所指向的内存中的值不能被改变。当改变某个变量时候，由于其所指的值不能被改变，相当于把原来的值复制一份后再改变，这会开辟一个新的地址，变量再指向这个新的地址。
+Advantages of yield:
 
-可变对象，该对象所指向的内存中的值可以被改变。变量（准确的说是引用）改变后，实际上其所指的值直接发生改变，并没有发生复制行为，也没有开辟出新的地址，通俗点说就是原地改变。
+Since it stores the local variable states, hence overhead of memory allocation is controlled.
+Since the old state is retained, flow doesn’t start from the beginnning and hence saves time.
 
-Pyhton中，数值类型(int 和float)，字符串str、元祖tuple都是不可变类型。而列表list、字典dict、集合set是可变类型
+Disadvantages of yield:
 
-### 91.Python的魔法方法
+Sometimes, the use of yield becomes erroneous if calling of function is not handled properly.
+The time and memory optimization has a cost of complexity of code and hence sometimes hard to understand logic behind it.
 
-魔法方法就是可以给你的类增加魔力的特殊方法，如果你的对象实现（重载）了这些方法中的某一个，那么这个方法就会在特殊的情况下被Python所调用，你可以定义自己想要的行为，而这一切都是自动发生的，它们经常是两个下划线包围来命名的（比如`__init___`,`__len__`),Python的魔法方法是非常强大的所以了解其使用方法也变得尤为重要!
+Example
+```python
+# generator to print even numbers 
+def print_even(test_list) : 
+    for i in test_list: 
+        if i % 2 == 0: 
+            yield i 
+```
 
-`__init__`构造器，当一个实例被创建的时候初始化的方法，但是它并不是实例化调用的第一个方法。
+Return sends a specified value back to its caller whereas Yield can produce a sequence of values. We should use yield when we want to iterate over a sequence, but don’t want to store the entire sequence in memory.
+## OOP
+### 90. Explain mutable and immutable objects in Python？
+A mutable object can be changed after it is created, and an immutable object can’t.
 
-`__new__`才是实例化对象调用的第一个方法，它只取下cls参数，并把其他参数传给`__init___`.
+Immutable Objects : These are of in-built types like int, float, bool, string, unicode, tuple. In simple words, an immutable object can’t be changed after it is created.
 
-`___new__`很少使用，但是也有它适合的场景，尤其是当类继承自一个像元祖或者字符串这样不经常改变的类型的时候。
+An immutable object whose value in the memory pointed to by the object cannot be changed. When changing a variable, because the value it refers to cannot be changed, it is equivalent to copying the original value and then changing it. This will open up a new address, and the variable will point to this new address.
 
-`__call__`让一个类的实例像函数一样被调用
+Mutable objects, the value of the memory pointed to by the object can be changed. After the variable (accurately referred to) is changed, in fact the value it refers to directly changes, and no copying behavior occurs, nor does it open up a new address. In general, it changes in place.
+In Pyhton, numeric types (int and float), string, and tuple  are immutable types. The list, dictionary dict, and set are mutable types
 
-`__getitem__`定义获取容器中指定元素的行为，相当于self[key]
+### 91.Magic methods in Python?
 
-`__getattr__`定义当用户试图访问一个不存在属性的时候的行为。
+In Python, method names that have leading and trailing double underscores are reserved for special use like the__init__ method for object constructors, or __call__ method to make object callable. These methods are known as dunder methods. dunder here means “Double Under (Underscores)”. These dunder methods are often referred to as magic methods. If your object implements (overloads) one of these methods, then this method will be called by Python under special circumstances. 
+Python's magic method is very powerful, so understanding how to use it is very important!
 
-`__setattr__`定义当一个属性被设置的时候的行为
+`__init__`constructor，The method is initialized when an instance is created, but it is not the first method invoked by the instantiation。
 
-`__getattribute___`定义当一个属性被访问的时候的行为
+`__new__` This is the first method called by the instantiated object. It only takes the cls parameter and passes other parameters to `__init ___`. It is rarely used, but there are scenarios where it is suitable, especially when the class inherits from a type like meta-ancestor or string that does not change often.
 
-### 92.面向对象中怎么实现只读属性?
+`__call__` Let an instance of a class be called like a function
 
-将对象私有化，通过共有方法提供一个读取数据的接口
+`__getitem__` Define the behavior of obtaining the specified element in the container, equivalent to self [key]
+
+`__getattr__` Define the behavior when the user tries to access an attribute that does not exist.
+
+`__setattr__` Define the behavior when a property is set
+
+`__getattribute___` Define the behavior when an attribute is accessed
+
+### 92. How to implement read-only attribute in object-oriented?
+
+Make a private and provide an interface to read data through a common method
 
 ```python
 class person:
@@ -1800,7 +1835,7 @@ t = person(22)
 print(t.age())
 ```
 
-最好的方法
+The best solution
 
 ```python
 class MyCls(object):
@@ -1812,80 +1847,116 @@ class MyCls(object):
    
 ```
 
-### 93.谈谈你对面向对象的理解？
+### 93.Explain your understanding of OOP？
 
-面向对象是相当于面向过程而言的，面向过程语言是一种基于功能分析的，以算法为中心的程序设计方法，而面向对象是一种基于结构分析的，以数据为中心的程序设计思想。在面向对象语言中有一个很重要的东西，叫做类。面向对象有三大特性：封装、继承、多态。
+Object-oriented is equivalent to process-oriented, process-oriented language is an algorithm-based programming method based on functional analysis, and object-oriented is a data-centric programming design idea based on structural analysis . There is a very important thing in object-oriented languages, called classes. Object-oriented has three major characteristics: encapsulation, abstraction, inheritance, and polymorphism.
 
-## 正则表达式
-### 94.请写出一段代码用正则匹配出ip？
+Encapsulation: encapsulation is one of the fundamental concepts in object-oriented programming (OOP). It describes the idea of wrapping data and the methods that work on data within one unit. This puts restrictions on accessing variables and methods directly and can prevent the accidental modification of data. To prevent accidental change, an object’s variable can only be changed by an object’s method.
 
-### 95.a = “abbbccc”，用正则匹配为abccc,不管有多少b，就出现一次？
-    思路：不管有多少个b替换成一个
+Inheritance is the capability of one class to derive or inherit the properties from another class. The benefits of inheritance are:
 
-    re.sub(r'b+', 'b', a)
-### 96.Python字符串查找和替换？
-    a、str.find()：正序字符串查找函数
-    函数原型：
-    str.find(substr [,pos_start [,pos_end ] ] )
-    返回str中第一次出现的substr的第一个字母的标号，如果str中没有substr则返回-1，也就是说从左边算起的第一次出现的substr的首字母标号。
+1. It represents real-world relationships well.
+2. It provides reusability of a code. We don’t have to write the same code again and again. Also, it allows us to add more features to a class without modifying it.
+3. It is transitive in nature, which means that if class B inherits from another class A, then all the subclasses of B would automatically inherit from class A.
 
-    参数说明：
-    str：代表原字符串
-    substr：代表要查找的字符串
-    pos_start：代表查找的开始位置，默认是从下标0开始查找
-    pos_end：代表查找的结束位置
+Different forms of Inheritance:
+1. Single inheritance: When a child class inherits from only one parent class, it is called single inheritance. We saw an example above.
 
-    例子：
+2. Multiple inheritance: When a child class inherits from multiple parent classes, it is called multiple inheritance.
+Unlike Java and like C++, Python supports multiple inheritance. We specify all parent classes as a comma-separated list in the bracket.
+3. Multilevel inheritance: When we have a child and grandchild relationship.
+4. Hierarchical inheritance More than one derived classes are created from a single base.
+5. Hybrid inheritance: This form combines more than one form of inheritance. Basically, it is a blend of more than one type of inheritance.
+
+Polymorphism: In programming, polymorphism means same function name (but different signatures) being uses for different types.
+
+## Regular expression
+### 94.Write a regular expression to match an IP address？
+```python
+import re
+def match_IP(ip):
+    ip_format = re.compile(r'''^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.( 
+            25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.( 
+            25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.( 
+            25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$''')
+
+    is_ip = ip_format.match(ip)
+    if is_ip:
+        return print(f"{ip} is an IP address")
+    else:
+        return print(f"{ip} is not an IP address")
+match_IP('124.4.125.147')
+match_IP('999.999.999.999')
+
+match_IP('124.124.1254.147') # not an ip
+match_IP('124.124.125.147') # an ip
+```
+
+### 95. Given a string a = "abbbccc"， write python code to replace reccurring b with one b no matter how many b are in the string, it will appear only once？
+Idea: No matter how many b are in the string, replace them by one
+```python
+import re
+print(re.sub(r'b+', 'b', a))
+```
+### 96. Searching and Replacing strings in Python？
+    a、str.find()： Positive sequence string search function
+    Syntax：
+    str.find(substr [,start [,end ] ] )
+        substr: the string which needs to be searched in the given string
+        start: starting position where substr needs to be checked within the string
+        end:ending position where suffix needs to be checked within the string
+    returns the lowest index of the substring if it is found in the given string.if its not found then it returns -1
+
+    example:
+```python
     'aabbcc.find('bb')' # 2
 
-    b、str.index()：正序字符串查找函数
-    index()函数类似于find()函数，在Python中也是在字符串中查找子串第一次出现的位置，跟find()不同的是，未找到则抛出异常。
+```
 
-    函数原型：
+    b、str.index()： Positive sequence string search function
+    The index() function is almost similar to the find() function. In Python, it also finds the first occurrence of a substring in a string. Unlike find(), an exception is thrown if it is not found.
+
+    Syntax
     str.index(substr [, pos_start, [ pos_end ] ] )
 
-    参数说明：
-    str：代表原字符串
-    substr：代表要查找的字符串
-    pos_start：代表查找的开始位置，默认是从下标0开始查找
-    pos_end：代表查找的结束位置
+    Parameters：
+    substr：the string which needs to be searched in the given string
+    pos_start：starting position where substr needs to be checked within the string, starts at 0 by default
+    pos_end：ending position where suffix needs to be checked within the string
 
-    例子：
+    Example:
+```python
     'acdd l1 23'.index(' ') # 4
+```
+    c、str.rfind()：Reverse string search function
 
-    c、str.rfind()：倒序字符串查找函数
-
-    函数原型：
+    Syntax:
     str.rfind( substr [, pos_start [,pos_ end ] ])
-    返回str中最后出现的substr的第一个字母的标号，如果str中没有substr则返回-1，也就是说从右边算起的第一次出现的substr的首字母标号。
+    returns the highest index of the substring if it is found in the given string.if its not found then it returns -1
+    
+    Parameters
+    substr：the string which needs to be searched in the given string
+    pos_start：starting position where substr needs to be checked within the string, starts at 0 by default
+    pos_end：ending position where suffix needs to be checked within the string
 
-    参数说明：
-    str：代表原字符串
-    substr：代表要查找的字符串
-    pos_start：代表查找的开始位置，默认是从下标0开始查找
-    pos_end：代表查找的结束位置
-
-    例子：
+    Example:
+```python
     'adsfddf'.rfind('d') # 5
+```
+    d、str.rindex()：Reverse string search function
+    The rindex() function is similar to the rfind() function. In Python, it also searches for the last occurrence of a substring in a string in reverse order. Unlike rfind(), an exception is thrown if it is not found.
 
-    d、str.rindex()：倒序字符串查找函数
-    rindex()函数类似于rfind()函数，在Python中也是在字符串中倒序查找子串最后一次出现的位置，跟rfind()不同的是，未找到则抛出异常。
-
-    函数原型：
+    Syntax:
     str.rindex(substr [, pos_start, [ pos_end ] ] )
 
-    参数说明：
-    str：代表原字符串
-    substr：代表要查找的字符串
-    pos_start：代表查找的开始位置，默认是从下标0开始查找
-    pos_end：代表查找的结束位置
 
-    例子：
-     'adsfddf'.rindex('d') # 5
+    Example：
+```python
+'adsfddf'.rindex('d') # 5
+```
 
-    e、使用re模块进行查找和替换：
-函数 | 说明
----|---
+    e、Use the re module to find and replace：
+    
 re.match(pat, s) | 只从字符串s的头开始匹配，比如(‘123’, ‘12345’)匹配上了，而(‘123’,’01234’)就是没有匹配上，没有匹配上返回None，匹配上返回matchobject
 re.search(pat, s) | 从字符串s的任意位置都进行匹配，比如(‘123’,’01234’)就是匹配上了，只要s只能存在符合pat的连续字符串就算匹配上了，没有匹配上返回None，匹配上返回matchobject
 re.sub(pat,newpat,s) | re.sub(pat,newpat,s)	对字符串中s的包含的所有符合pat的连续字符串进行替换，如果newpat为str,那么就是替换为newpat,如果newpat是函数，那么就按照函数返回值替换。sub函数两个有默认值的参数分别是count表示最多只处理前几个匹配的字符串，默认为0表示全部处理；最后一个是flags，默认为0
