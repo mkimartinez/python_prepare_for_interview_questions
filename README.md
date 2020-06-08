@@ -1759,6 +1759,11 @@ Generator, just use the yield statement when you need to return data. Each time 
 Difference: The generator can do everything the iterator can do, and because the iter () and next () methods are automatically created, the generator is particularly concise, and the generator is also efficient. Use generator expressions instead of list parsing. At the same time save memory. In addition to the automatic method of creating and saving program state, when the generator ends, it will automatically throw a StopIteration exception.
 
 Official documentation：https://docs.python.org/3/tutorial/classes.html#iterators
+
+### 87. Write a generator function to sum all numbers from 1000 to 2000, inclusive which are divisible by three
+```python
+    res = sum(x for x in range(1000, 20001) if x %3==0)
+```
 ### 87.What is the data type of x?
     X= (i for i in range(10))
     X is a generator 
@@ -1957,49 +1962,60 @@ print(re.sub(r'b+', 'b', a))
 
     e、Use the re module to find and replace：
     
-re.match(pat, s) | 只从字符串s的头开始匹配，比如(‘123’, ‘12345’)匹配上了，而(‘123’,’01234’)就是没有匹配上，没有匹配上返回None，匹配上返回matchobject
-re.search(pat, s) | 从字符串s的任意位置都进行匹配，比如(‘123’,’01234’)就是匹配上了，只要s只能存在符合pat的连续字符串就算匹配上了，没有匹配上返回None，匹配上返回matchobject
-re.sub(pat,newpat,s) | re.sub(pat,newpat,s)	对字符串中s的包含的所有符合pat的连续字符串进行替换，如果newpat为str,那么就是替换为newpat,如果newpat是函数，那么就按照函数返回值替换。sub函数两个有默认值的参数分别是count表示最多只处理前几个匹配的字符串，默认为0表示全部处理；最后一个是flags，默认为0
+    re.match(pat, s) | The match() method checks for a match only at tthe beginning of the string s. For example, (‘123’, ‘12345’) matches, and (‘123’, ‘01234’) does not match, if there is no match, it returns None, and if it matches, it returns matchobject.
 
-    f、使用replace()进行替换：
-    基本用法：对象.replace(rgExp,replaceText,max)
+    re.search(pat, s) | Checks for a match anywhere in the string, For example(‘123’,’01234’) matches，As long as s can only have a continuous string that matches pat, it is matched, if there is no match, it returns None, and if it matches, it returns matchobject
+    re.sub(pat,newpat,s) | re.sub(pat,newpat,s)	Replace all consecutive strings in the string that match s in pat，If newpat is str, then replace it with newpat, if newpat is a function, then replace according to the function return value。The two parameters of the sub function with default values are count, which means that only the first few matched strings are processed. The default is 0, which means all processing; the last one is flags, and the default is 0.
 
-    其中，rgExp和replaceText是必须要有的，max是可选的参数，可以不加。
-    rgExp是指正则表达式模式或可用标志的正则表达式对象，也可以是 String 对象或文字；
-    replaceText是一个String 对象或字符串文字；
-    max是一个数字。
-    对于一个对象，在对象的每个rgExp都替换成replaceText，从左到右最多max次。
+    f、Use replace() to replace strings：
+    Basic usage：object.replace(rgExp,replaceText,max)
+
+    rgExp and replaceText are not optional，maxis optional。
+    rgExp refers to the regular expression object of the regular expression pattern or available flags, and can also be a String object or text;
+    replaceText is a String object or text；
+    max is an integer。
+    For an object, each rgExp in the object is replaced with replaceText, at most max times from left to right.
 
     s1='hello world'
     s1.replace('world','liming')
 
-### 97.用Python匹配HTML tag的时候，<.*> 和 <.*?> 有什么区别
-    第一个代表贪心匹配，第二个代表非贪心；
-    ?在一般正则表达式里的语法是指的"零次或一次匹配左边的字符或表达式"相当于{0,1}
-    而当?后缀于*,+,?,{n},{n,},{n,m}之后，则代表非贪心匹配模式，也就是说，尽可能少的匹配左边的字符或表达式，这里是尽可能少的匹配.(任意字符)
+### 97.When matching HTML tags with Python, what is the difference between <.*> and <.*?>
+    The first one represents greedy matching, and the second one represents non-greedy；
+    ? The grammar in a regular expression means that "zero or one match to the character or expression on the left" is equivalent to {0,1}
+    When the ? Suffix is after *,+,?,{n},{n,},{n,m}, it represents a non-greedy matching pattern, that is, match as few characters or expressions as possible on the left, Here is as few matches as possible. (Any character)
 
-    所以：第一种写法是，尽可能多的匹配，就是匹配到的字符串尽量长，第二中写法是尽可能少的匹配，就是匹配到的字符串尽量短。
-    比如<tag>tag>tag>end，第一个会匹配<tag>tag>tag>,第二个会匹配<tag>。
-### 98.正则表达式贪婪与非贪婪模式的区别？
-    贪婪模式：
-    定义：正则表达式去匹配时，会尽量多的匹配符合条件的内容
-    标识符：+，?，*，{n}，{n,}，{n,m}
-    匹配时，如果遇到上述标识符，代表是贪婪匹配，会尽可能多的去匹配内容
+    The first way  <.*> is to match as much as possible, that is, the matched string is as long as possible, and the second way <.*?> is to match as little as possible, that is, the matched string is as short as possible.
+    For example, <tag>tag>tag>end, the first one will match <tag>tag>tag>, the second one will match <tag>。
+### 98.The difference between greedy and non-greedy matching modes in regular expressions？
+    Greedy mode：
+    Definition：When regular expressions are matched, they will match as many as possible
+    Identifier：+，?，*，{n}，{n,}，{n,m}
+    When matching, if the above identifier is encountered, it represents a greedy match, and it will match as many as possible.
+    Example
 
-    非贪婪模式：
-    定义：正则表达式去匹配时，会尽量少的匹配符合条件的内容 也就是说，一旦发现匹配符合要求，立马就匹配成功，而不会继续匹配下去(除非有g，开启下一组匹配)
-    标识符：+?，??，*?，{n}?，{n,}?，{n,m}?
-    可以看到，非贪婪模式的标识符很有规律，就是贪婪模式的标识符后面加上一个?
 
-    参考文章：https://dailc.github.io/2017/07/06/regularExpressionGreedyAndLazy.html
+    Non Greedy mode：
+    Definition：When the regular expression is matched, the content that matches the condition will be matched as little as possible. That is, once the match is found, the match is immediately successful, and the match will not continue (unless there is g, turn on the next set of matches)
+    identifier：+?，??，*?，{n}?，{n,}?，{n,m}?
+    It can be seen that the identifiers of the non-greedy mode are very regular, that is, the identifier of the greedy mode is followed by "?"
 
-### 99.写出开头匹配字母和下划线，末尾是数字的正则表达式？
+    Reference：https://dailc.github.io/2017/07/06/regularExpressionGreedyAndLazy.html
+
+### 99. Write a regular expression that matches letters and underscores at the beginning and numbers at the end？
+```python
+    def match_string(text):
+
+        res=re.findall('^[a-zA-Z_]?[a-zA-Z0-9_]{1,}\d$',s1)
+        return print(res)
     s1='_aai0efe00'
-    res=re.findall('^[a-zA-Z_]?[a-zA-Z0-9_]{1,}\d$',s1)
-    print(res)
-
-### 100.正则表达式操作
-### 101.请匹配出变量A 中的json字符串。
+    match_string(s1)
+```
+### 100.Regular expression operations
+### 101.Write code to match the json string in variable A。
+```python
+    A ="myjson"
+    res = 
+```
 ### 102.怎么过滤评论中的表情？
     思路：主要是匹配表情包的范围，将表情包的范围用空替换掉
 ```
